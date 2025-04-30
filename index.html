@@ -72,6 +72,21 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  
+.blur-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 39, 39, 0.4); /* Camada semi-transparente */
+  backdrop-filter: blur(1px); /* Aplica o desfoque */
+  -webkit-backdrop-filter: blur(8px); /* Compatibilidade com Safari */
+  z-index: 1; /* Coloca a camada acima do fundo */
+  border-radius: 10px; /* Arredonda as bordas */
+  pointer-events: none; /* Garante que a camada não bloqueie interações */
+}
+
 }
 
     .section2 {
@@ -159,7 +174,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(39, 39, 39, 0.4); /* Camada semi-transparente */
-  backdrop-filter: blur(0.5px); /* Aplica o desfoque */
+  backdrop-filter: blur(1px); /* Aplica o desfoque */
   -webkit-backdrop-filter: blur(8px); /* Compatibilidade com Safari */
   z-index: 1; /* Coloca a camada acima do fundo */
   border-radius: 10px; /* Arredonda as bordas */
