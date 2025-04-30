@@ -167,15 +167,15 @@
   border-radius: 10px; /* Arredonda as bordas */
   pointer-events: none; /* Garante que a camada não bloqueie interações */
 }
-
-    @media (max-width: 600px) {
-  .blur-effect {
+@media (max-width: 600px) {
+  .section3-container {
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
-    background-color: rgba(39, 39, 39, 0.1);
+    background-color: rgba(39, 39, 39, 0.4); /* igual ao .blur-effect */
+    border-radius: 10px;
   }
 }
-}
+    
 /* Cards da seção AIVRSE */
 .section3-container {
   display: flex;
@@ -245,7 +245,12 @@
   font-size: 16px; /* Tamanho do ícone */
 
 }
-
+@media (max-width: 600px) {
+  .intro h2 {
+    font-size: 1.8rem; /* ou menor, se necessário */
+    white-space: nowrap;
+  }
+}
     /* Footer */
     footer {
       background-color: #111;
