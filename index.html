@@ -75,13 +75,7 @@
 
 }
 
-/* Ajuste específico para mobile */
-@media (max-width: 600px) {
-  .blur-effect {
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-  }
-}
+
     .section2 {
   background-color: #111;
   color: #fff;
@@ -174,6 +168,14 @@
   pointer-events: none; /* Garante que a camada não bloqueie interações */
 }
 
+    @media (max-width: 600px) {
+  .blur-effect {
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    background-color: rgba(39, 39, 39, 0.1);
+  }
+}
+}
 /* Cards da seção AIVRSE */
 .section3-container {
   display: flex;
