@@ -5,259 +5,296 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projetos | Tour Virtual 360° - AIVRSE</title>
   <style>
-<style>
-  /* Reset básico */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0d0d0d;
-    color: #f0f0f0;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header, footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #ffffff;
-  }
-
-  footer, p {
-    color: #1a1a1a;
-  }
-
-  header img {
-    max-width: 250px;
-    height: auto;
-  }
-
-  .projects-section {
-    background-color: #0d0d0d;
-    padding: 60px 20px 100px 20px;
-    flex: 1;
-  }
-
-  .section-title {
-    font-size: 2.5em;
-    color: #00fff7;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  .section-subtitle {
-    font-size: 1.2em;
-    color: #cccccc;
-    margin-bottom: 50px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 0 20px;
-  }
-
-  .project-card {
-    background: #1a1a1a;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 255, 247, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 255, 247, 0.25);
-  }
-
-  .project-card iframe,
-  .project-card img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border: none;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-  }
-
-  .project-info {
-    padding: 25px 20px;
-    flex-grow: 1;
-  }
-
-  .project-info h3 {
-    font-size: 1.4em;
-    color: #00fff7;
-    margin-bottom: 10px;
-  }
-
-  .project-info p {
-    font-size: 0.95em;
-    color: #dddddd;
-  }
-
-  .expand-btn {
-    margin-top: 15px;
-    padding: 10px 16px;
-    background-color: #99999917;
-    border: 1px solid #00fff7;
-    color: #00fff7;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    font-size: 1em;
-  }
-
-  .expand-btn:hover {
-    background-color: #00cccc;
-  }
-
-  /* Botão Voltar */
-  .back-button-container {
-    position: absolute;
-    bottom: 100px;
-    left: 20px;
-    z-index: 999;
-  }
-
-  .back-button {
-    background-color: #1a1a1a;
-    border: 1px solid #00fff7;
-    color: #00fff7;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .back-button:hover {
-    background-color: #00fff7;
-    color: #000;
-  }
-
-  /* Modal estilo fullscreen */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 1000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal iframe {
-    width: 90vw;
-    height: 90vh;
-    border: none;
-    border-radius: 12px;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-  }
-
-  /* === RESPONSIVIDADE PARA MOBILE === */
-  @media (max-width: 768px) {
-    header img {
-      max-width: 200px;
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .section-title, h2{
-      font-size: 1.8rem; /* Menor em mobile */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .section-subtitle {
-      font-size: 1em;
+    header, footer {
       text-align: center;
+      padding: 10px;
+      background-color: #ffffff;
+    }
+
+    footer, p {
+      color: #1a1a1a;
+    }
+
+    header img {
+      max-width: 250px;
+      height: auto;
+    }
+
+    .projects-section {
+      background-color: #0d0d0d;
+      padding: 60px 20px 40px 20px; /* Reduzi o padding inferior para não grudar no footer */
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Container centralizado */
+    .projects-section .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Título da seção */
+    .section-title {
+      font-size: 2.5rem;
+      color: #08bac7;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Subtítulo da seção */
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: #d4d1d1;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Lista de recursos */
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 2rem auto;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .features-list li {
+      font-size: 1rem;
+      color: #dad6d6;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Ícone de checkmark */
+    .features-list li i {
+      color: #00f0ff;
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cards */
+    /* Grid de Cards */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar linha se necessário */
+  justify-content: center; /* Centraliza horizontalmente */
+  gap: 30px; /* Espaçamento entre cards */
+  margin-top: -10px;
+  margin-bottom: 110px;
+}
+
+/* Estilo dos Cards */
+.project-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 255, 247, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: calc(33.33% - 20px); /* Divide a largura em 3 partes (33.33%) menos o espaçamento */
+  min-width: 300px; /* Garante um tamanho mínimo para responsividade */
+}
+  
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 255, 247, 0.25);
     }
 
     .project-card iframe,
     .project-card img {
-      height: 220px;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border: none;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .project-info {
+      padding: 25px 20px;
+      flex-grow: 1;
     }
 
     .project-info h3 {
-      font-size: 1.1em;
+      font-size: 1.4em;
+      color: #00fff7;
+      margin-bottom: 10px;
     }
 
     .project-info p {
-      font-size: 0.85em;
+      font-size: 0.95em;
+      color: #dddddd;
     }
 
+    .expand-btn {
+      margin-top: 15px;
+      padding: 10px 16px;
+      background-color: #99999917;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      font-size: 1em;
+    }
+
+    .expand-btn:hover {
+      background-color: #00cccc;
+    }
+
+    /* Botão Voltar */
     .back-button-container {
+      position: absolute;
       bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 20px;
       z-index: 999;
     }
 
     .back-button {
-      width: 80vw;
-      max-width: 100px;
-      font-size: 0.95em;
-      padding: 12px 16px;
-      text-align: center;
-    }
-
-    footer {
-      padding: 15px;
-      font-size: 0.7em;
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .section-title {
-      font-size: 1.7em;
-    }
-
-    .section-subtitle {
-      font-size: 0.9em;
-    }
-
-    header img {
-      width: 80%;
-    }
-
-    .project-info h3 {
+      background-color: #1a1a1a;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      padding: 10px 20px;
+      border-radius: 8px;
       font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .project-info p {
-      font-size: 0.8em;
+    .back-button:hover {
+      background-color: #00fff7;
+      color: #000;
     }
 
-    .back-button {
-      font-size: 0.9em;
-      padding: 10px 14px;
+    /* Modal estilo fullscreen */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
     }
-  }
-</style>
+
+    .modal iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 12px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* === RESPONSIVIDADE PARA MOBILE === */
+    @media (max-width: 768px) {
+      header img {
+        max-width: 200px;
+      }
+
+      .section-title, h2 {
+        font-size: 1.8rem;
+      }
+
+      .section-subtitle {
+        font-size: 1em;
+        text-align: center;
+      }
+
+      .project-card iframe,
+      .project-card img {
+        height: 220px;
+      }
+
+      .project-info h3 {
+        font-size: 1.1em;
+      }
+
+      .project-info p {
+        font-size: 0.85em;
+      }
+
+      .back-button-container {
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+      }
+
+      .back-button {
+        width: 80vw;
+        max-width: 100px;
+        font-size: 0.95em;
+        padding: 12px 16px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 15px;
+        font-size: 0.7em;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 1.7em;
+      }
+
+      .section-subtitle {
+        font-size: 0.9em;
+      }
+
+      header img {
+        width: 80%;
+      }
+
+      .project-info h3 {
+        font-size: 1em;
+      }
+
+      .project-info p {
+        font-size: 0.8em;
+      }
+
+      .back-button {
+        font-size: 0.9em;
+        padding: 10px 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -272,41 +309,45 @@
     <section class="projects-section">
       <div class="container">
         <h2 class="section-title">Projetos em Tour Virtual 360°</h2>
-        <p class="section-subtitle">Explore algumas experiências imersivas desenvolvidas com Panoee e Panellum.</p>
-
-        <div class="projects-grid">
-          <!-- Projeto 1 -->
-          <div class="project-card">
-            <iframe src="https://tour.panoee.net/67894c07234c0474530f4778 " allowfullscreen></iframe>
-            <div class="project-info">
-              <h3>Quarto Imersivo</h3>
-              <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar todos os detalhes do ambiente.</p>
-              <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir Tour</button>
-            </div>
-          </div>
-
-          <!-- Projeto 2 -->
-          <div class="project-card">
-            <iframe src="tour-sala.html" allowfullscreen></iframe>
-            <div class="project-info">
-              <h3>Ambiente Residencial </h3>
-              <p>Apartamento decorado com visualização panorâmica em 360°. </p>
-              <button class="expand-btn" onclick="openModal('tour-sala.html')">Abrir Tour</button>
-            </div>
-          </div>
-
-          <!-- Projeto 3 -->
-          <div class="project-card">
-            <iframe src="tour-galeria.html" allowfullscreen></iframe>
-            <div class="project-info">
-              <h3>Galeria Comercial</h3>
-              <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para desktop e mobile.</p>
-              <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
-            </div>
-          </div>
-        </div>
+        <p class="section-subtitle">
+          Leve seus clientes para dentro do projeto com uma experiência imersiva e acessível. <br>
+          Ideal para interiores residências, comerciais e demais ambientes. <br> Navegue por todo ambiente - Visualize e acesse de qualquer dispositivo.
+        </p>
       </div>
     </section>
+
+    <!-- Grid de Cards -->
+    <div class="projects-grid">
+      <!-- Projeto 1 -->
+      <div class="project-card">
+        <iframe src="https://tour.panoee.net/67894c07234c0474530f4778 " allowfullscreen></iframe>
+        <div class="project-info">
+          <h3>Quarto Imersivo</h3>
+          <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar todos os detalhes do ambiente.</p>
+          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir Tour</button>
+        </div>
+      </div>
+
+      <!-- Projeto 2 -->
+      <div class="project-card">
+        <iframe src="tour-sala.html" allowfullscreen></iframe>
+        <div class="project-info">
+          <h3>Ambiente Residencial</h3>
+          <p>Apartamento decorado com visualização panorâmica em 360°.</p>
+          <button class="expand-btn" onclick="openModal('tour-sala.html')">Abrir Tour</button>
+        </div>
+      </div>
+
+      <!-- Projeto 3 -->
+      <div class="project-card">
+        <iframe src="tour-galeria.html" allowfullscreen></iframe>
+        <div class="project-info">
+          <h3>Galeria Comercial</h3>
+          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para desktop e mobile.</p>
+          <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Botão Voltar posicionado abaixo dos cards -->
