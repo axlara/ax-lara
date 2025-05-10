@@ -138,7 +138,7 @@
         padding: 1.5rem 1rem;
       }
       .section2 h2 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       .section2 .ola {
         font-size: 1.8rem;
@@ -148,68 +148,87 @@
       }
     }
 
-    /* Seção AIVRSE */
-    .section3 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #333;
-      gap: 40px;
-      padding: 40px 20px;
-    }
-    .section3 img {
-      width: 300px;
-    }
-    .section3 p {
-      font-size: 1rem;
-      color: #ccc;
-      max-width: 600px;
-      margin: 1rem auto;
-    }
+   /* Seção AIVRSE */
+.section3 {
+  display: flex;
+  flex-direction: column; /* Para mobile */
+  align-items: center;
+  background-color: #333;
+  gap: 40px;
+  padding: 40px 20px;
+}
 
-    /* Cards de Serviços */
-    .section3-container {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      width: 100%;
-      max-width: 700px;
-    }
-    .service-card {
-      display: flex;
-      align-items: center;
-      background-color: #1f1f1f;
-      padding: 20px;
-      border: 1px solid #333;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: inherit;
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
-    }
-    .service-card img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-right: 20px;
-    }
-    .service-card .texto h3 {
-      color: #00ffff;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    .service-card .texto p {
-      color: #ccc;
-      font-size: 16px;
-      line-height: 1.5;
-    }
+.section3 p {
+  font-size: 1.2rem;
+    line-height: 1.7;
+    color: #ccc;
+    text-align: center;
+}
 
-    @media (max-width: 768px) {
-      .service-card {
+.section3-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar linha se necessário */
+  justify-content: center; /* Centraliza horizontalmente */
+  gap: 20px; /* Espaçamento entre cards */
+}
+
+/* Estilo dos Cards */
+.service-card {
+  display: flex;
+  flex-direction: column; /* Para mobile */
+  background-color: #1f1f1f;
+  padding: 30px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  width: calc(33.33% - 20px); /* Divide a largura em 3 partes (33.33%) menos o espaçamento */
+  min-width: 300px; 
+  max-width: 350px;
+  box-shadow: 0 0 5px rgba(0, 240, 255, 0.8), inset 0 0 5px rgba(0, 240, 255, 0.8);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+}
+
+.service-card img {
+  width: 100%; /* Imagem ocupa toda a largura do card */
+  height: auto; /* Mantém proporção correta */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px; /* Espaço entre imagem e texto */
+}
+
+.service-card .texto h3 {
+  color: #00ffff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.service-card .texto p {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Responsividade para Desktop */
+@media (min-width: 768px) {
+  .section3-container {
+    flex-direction: row; /* Alinha os cards horizontalmente no desktop */
+  }
+
+  .service-card {
+    flex-direction: column; /* Mantém a direção vertical */
+    text-align: left; /* Alinha o texto à esquerda */
+  }
+}
+
+/* Responsividade para Mobile */
+@media (max-width: 768px) {
+  .service-card {
     flex-direction: column; /* Altera para coluna no mobile */
     align-items: center; /* Centraliza verticalmente */
     text-align: center; /* Alinha texto ao centro */
@@ -224,8 +243,9 @@
   .service-card .texto {
     text-align: center; /* Alinha texto ao centro */
   }
-    }
+}
 
+  
     /* Footer */
     footer {
       background-color: #111;
@@ -328,7 +348,7 @@
       <p>Criadora e desenvolvedora de experiências ambientais imersivas. Guiada pelas emoções provocadas pelos espaços, busco, através da tecnologia, novas formas de criar experiências que conectem o físico ao virtual.</p>
       <p>Minha jornada começou na arquitetura e urbanismo, com especialização em projetos arquitetônicos e neuroarquitetura, onde criei experiência em percepção espacial e design efetivo de ambientes. Com o tempo, surgiu o desejo e necessidade de ir além dos limites tradicionais da arquitetura, o que me levou a explorar a tecnologia como novo campo de atuação.</p>
       <p>Durante essa transição, aprofundei meus estudos em programação e descobri as tecnologias imersivas (XR), onde encontrei a conexão perfeita entre minha bagagem em arquitetura e as novas possibilidades digitais. A partir daí, passei a expandir minhas habilidades na criação de ambientes digitais interativos.</p>
-      <p>Hoje, me especializo em criar experiências imersivas utilizando softwares e tecnologias que permitem transformar espaços físicos em ambientes digitais interativos. Além disso, ofereço serviços como <strong>freelancer em modelagem 3D otimizada para ambientes interativos</strong> e <strong>tours virtuais 360°</strong>, com soluções personalizadas para diversos tipos de projetos.</p>
+      <p><strong>Hoje, me especializo em criar experiências imersivas utilizando softwares e tecnologias que permitem transformar espaços físicos em ambientes digitais interativos. Além disso, ofereço serviços como freelancer em modelagem 3D otimizada para ambientes interativos</strong> e <strong>tours virtuais 360°</strong>, com soluções personalizadas para diversos tipos de projetos.</p>
       <p>Em breve, estarei lançando oficialmente a AIVRSE, focado na criação de mundos virtuais personalizados e no desenvolvimento de experiências imersivas. Através dele, pretendo oferecer soluções inovadoras para diferentes áreas e necessidades virtuais.</p>
     </div>
   </section>
@@ -336,7 +356,8 @@
   <!-- Seção AIVRSE -->
   <section class="section3" id="section3">
     <img src="/imagens/logoaivrse1transp.png" alt="logoaivrse" width="300px">
-    <p>Conheça nosso estúdio e explore os projetos de Tour Virtual 360°. Em breve, também ofereceremos experiências em Realidade Aumentada e Realidade Virtual.</p>
+    <p>Bem-vindo ao universo da tecnologia imersiva — onde sonhos ganham forma, cor e movimento,
+      transformando projetos em experiências reais. <br> Conheça e explore nossos projetos em Tour Virtual 360°. Em breve, também ofereceremos experiências em Realidade Aumentada e Realidade Virtual.</p>
 
     <!-- Container dos Cards -->
     <div class="section3-container">
@@ -345,7 +366,7 @@
         <img src="imagens/360img.png" alt="Tour Virtual 360°">
         <div class="texto">
           <h3>Tour Virtual 360°</h3>
-          <p>Navegue por ambientes realistas em 360°, com interatividade e imersão sensorial.</p>
+          <p>Navegue e explore ambientes realistas em 360°.</p>
         </div>
       </a>
 
