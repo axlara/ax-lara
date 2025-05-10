@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio Freelancer - AX-LARA</title>
+  <title>Perfil Técnico - AX-LARA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
@@ -37,22 +37,6 @@
       font-size: 0.9rem;
       color: #555;
       margin: 5px 0;
-    }
-
-    .btn-voltar {
-      display: inline-block;
-      margin: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #3d3d3d3f;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      transition: background-color 0.3s;
-    }
-
-    .btn-voltar:hover {
-      background-color: #333;
     }
 
     .container {
@@ -92,6 +76,26 @@
       margin-bottom: 10px;
       color: #bbb;
     }
+    .btn-voltar {
+      background-color: #1a1a1a;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      left: 20px;
+      z-index: 999;
+      margin-top: -40px;
+      text-decoration: none;
+    }
+
+    .btn-voltar :hover {
+      background-color: #00fff7;
+      color: #000;
+    }
 
     footer {
       background-color: #222;
@@ -114,11 +118,78 @@
   </style>
 </head>
 <body>
+   <!-- Barra de Idiomas -->
+<div class="language-bar">
+  <button onclick="translateTo('en')">EN</button>
+  <span style="margin: 0 8px;">|</span>
+  <button onclick="translateTo('es')">ES</button>
+</div>
+
+<style>
+  .language-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #58585846;
+    padding: 8px 16px;
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    gap: -10px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .language-bar button {
+    background: none;
+    border: none;
+    color: #00f0ff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+  }
+
+  .language-bar button:hover {
+    opacity: 0.7;
+  }
+</style>
+<!-- Google Translate Script -->
+<div id="google_translate_element" style="display: none;"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'pt',
+      includedLanguages: 'en,es,pt',
+      layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  (function () {
+    var gt = document.createElement('script');
+    gt.type = 'text/javascript';
+    gt.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(gt);
+  })();
+
+  function translateTo(lang) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    } else {
+      setTimeout(() => translateTo(lang), 500); // Tenta novamente se não carregou
+    }
+  }
+</script>
   <!-- Cabeçalho -->
   <header>
     <h2>AX-LARA</h2>
     <h1>Architect of Xperience</h1>
-    <p>Portfolio Freelancer - Lara E. Negreiros</p>
+    <p>Perfil Técnico Profissional - Lara E. Negreiros</p>
   </header>
 
   <!-- Container Principal -->
@@ -137,17 +208,16 @@
     </div>
 
     <!-- Modelagem 3D -->
-    <div class="section">
-      <h2>Modelagem 3D</h2>
-      <ul>
-        <li>SketchUp</li>
-        <li>Revit</li>
-        <li>AutoCAD</li>
-        <li>Lumion (render)</li>
-        <li>Twinmotion (render)</li>
-        <li>Otimização de texturas e modelagem para exportação</li>
-      </ul>
-    </div>
+      <div class="section">
+        <h2>Softwares: Modelagem 3D e Produção Visual</h2>
+        <ul>
+          <li>SketchUp (modelagem)</li>
+          <li>Revit (BIM)</li>
+          <li>AutoCAD (desenho técnico)</li>
+          <li>Lumion e Twinmotion (renderização)</li>
+          <li><i>Otimização de modelos para exportação</i></li>
+        </ul>
+      </div>
 
     <!-- Tecnologias Imersivas -->
     <div class="section">
@@ -167,7 +237,7 @@
       <ul>
         <li>HTML, CSS</li>
         <li>JavaScript</li>
-        <li>Integrações Web com AR.js e Pannellum</li>
+        <li>Integrações Web (AR.js, Pannellum)</li>
       </ul>
     </div>
 
@@ -175,9 +245,10 @@
     <div class="section">
       <h2>Ferramentas de Colaboração</h2>
       <ul>
-        <li>Figma (prototipagem e design colaborativo)</li>
-        <li>Git (controle de versões)</li>
-        <li>VS Code (desenvolvimento)</li>
+        <li>Figma (prototipagem)</li>
+        <li>Photoshop, GIMP, Canva (edição de imagem)</li>
+        <li>Git, VS Code (desenvolvimento)</li>
+        <li>Qwen, DeepSeek, ChatGPT (IA para auxílio)</li>
       </ul>
     </div>
 
@@ -185,14 +256,15 @@
     <div class="section">
       <h2>Formação Acadêmica</h2>
       <ul>
-        <li>Especialização em Projeto de Arquitetura: da concepção ao edifício – PUC PR (2018)</li>
+        <li>Pós-graduação em Projeto de Arquitetura: da concepção ao edifício – PUC PR (2018)</li>
         <li>Bacharelado em Arquitetura e Urbanismo – UNP (2015)</li>
       </ul>
       <h2>Cursos Complementares</h2>
       <ul>
+        <li>Unreal Engine: Fundamentos para Projetos Imersivos - VR Academy</li>
         <li>Desenvolvedor Full-stack – SENAC</li>
-        <li>CAP Light Design - Iluminação Comercial e Corporativa - IPOG</li>
-        <li>Neuroarquitetura - Princípios de Neurociência Aplicada - Neuroarq Academy</li>
+        <li>Neuroarquitetura: Princípios de Neurociência Aplicada - Neuroarq Academy</li>
+        <li>CAP Light Design: Iluminação Comercial e Corporativa - IPOG</li> 
         <li>Produto & Projeto de Mobiliário - Dalmobile fabric.</li>
       </ul>
     </div>
