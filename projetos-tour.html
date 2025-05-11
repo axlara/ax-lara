@@ -178,16 +178,30 @@
       border: 1px solid #00fff7;
       color: #00fff7;
       padding: 10px 20px;
-      border-radius: 8px;
+      border-radius: 999px;
       font-size: 1em;
       cursor: pointer;
       transition: all 0.3s ease;
-    }
+      padding: 10px 16px;
+      position: fixed;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none !important;
+}
+    
+.back-button::before {
+  content: "←";
+  font-size: 1.2em;
+  display: inline-block;
+}
 
-    .back-button:hover {
-      background-color: #00fff7;
-      color: #000;
-    }
+.back-button:hover {
+  background-color: #00fff7;
+  color: #000;
+}
+  
 
     /* Modal estilo fullscreen */
     .modal {
@@ -254,13 +268,15 @@
         z-index: 999;
       }
 
-      .back-button {
-        width: 80vw;
-        max-width: 100px;
-        font-size: 0.95em;
-        padding: 12px 16px;
-        text-align: center;
-      }
+    .back-button {
+    width: 80vw; /* Aumenta o tamanho do botão em telas menores */
+    max-width: 100px; /* Limita o tamanho máximo */
+    font-size: 0.95em;
+    padding: 12px 16px; /* Ajusta o padding */
+    text-align: center;
+    border-radius: 999px; /* Mantém o botão redondo */
+  }
+}
 
       footer {
         padding: 15px;
@@ -290,11 +306,15 @@
         font-size: 0.8em;
       }
 
-      .back-button {
-        font-size: 0.9em;
-        padding: 10px 14px;
-      }
-    }
+     .back-button {
+    width: 80vw; /* Aumenta o tamanho do botão em telas menores */
+    max-width: 100px; /* Limita o tamanho máximo */
+    font-size: 0.95em;
+    padding: 12px 16px; /* Ajusta o padding */
+    text-align: center;
+    border-radius: 999px; /* Mantém o botão redondo */
+  }
+}
   </style>
 </head>
 <body>
@@ -353,7 +373,7 @@
   <!-- Botão Voltar posicionado abaixo dos cards -->
   <div class="back-button-container">
     <a href="index.html">
-      <button class="back-button">Voltar</button>
+      <button class="back-button"></button>
     </a>
   </div>
 

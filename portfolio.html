@@ -76,27 +76,36 @@ header p {
   margin-bottom: 10px;
   color: #bbb;
 }
-
 .btn-voltar {
   background-color: #1a1a1a;
   border: 1px solid #00fff7;
   color: #00fff7;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 999px; /* botão arredondado estilo pill */
   font-size: 1em;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: absolute;
+  position: fixed;
+  bottom: 20px;
   left: 20px;
   z-index: 999;
-  margin-top: -40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
+}
+
+.btn-voltar::before {
+  content: "←";
+  font-size: 1.2em;
+  display: inline-block;
 }
 
 .btn-voltar:hover {
   background-color: #00fff7;
   color: #000;
 }
+
 
 footer {
   background-color: #222;
@@ -167,37 +176,31 @@ footer .social-icons i:hover {
 <body>
    <!-- Barra de Idiomas -->
 <div class="language-bar">
-  <button onclick="translateTo('en')">EN</button>
-  <span style="margin: 0 8px;">|</span>
-  <button onclick="translateTo('es')">ES</button>
+  <button onclick="translateTo('en')" aria-label="English">
+    <img src="https://flagcdn.com/gb.svg" alt="English" width="24" height="16">
+  </button>
+  <button onclick="translateTo('es')" aria-label="Español">
+    <img src="https://flagcdn.com/es.svg" alt="Español" width="24" height="16">
+  </button>
 </div>
 
 <style>
-  .language-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #58585846;
-    padding: 8px 16px;
-    z-index: 9999;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    gap: -10px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
+.language-bar {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  z-index: 1000;
+  display: flex;
+  gap: 1px; /* distância entre as bandeiras */
+  background: none;
+}
 
-  .language-bar button {
-    background: none;
-    border: none;
-    color: #00f0ff;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 14px;
-    transition: opacity 0.3s ease;
-  }
-
+.language-bar button {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+}
   .language-bar button:hover {
     opacity: 0.7;
   }
@@ -324,7 +327,7 @@ footer .social-icons i:hover {
       <a href="https://www.linkedin.com/in/laranegreiros/" target="_blank"><i class="fab fa-linkedin"></i></a>
       <a href="https://wa.me/+5584996249406" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
-    <a href="index.html" class="btn-voltar">Voltar</a>
+    <a href="index.html" class="btn-voltar"></a>
   </footer>
 </body>
 </html>
