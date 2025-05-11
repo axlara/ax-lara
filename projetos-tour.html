@@ -168,29 +168,35 @@
     /* Botão Voltar */
     .back-button-container {
       position: absolute;
-      bottom: 100px;
+      bottom: 60px;
       left: 20px;
       z-index: 999;
+      text-decoration: none !important;
     }
 
-    .back-button {
-      background-color: #1a1a1a;
-      border: 1px solid #00fff7;
-      color: #00fff7;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 10px 16px;
-      position: fixed;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none !important;
+  .back-button {
+  background-color: #1a1a1a;
+  border: 1px solid #00fff7;
+  color: #00fff7;
+  width: 50px; /* Define a largura do botão */
+  height: 50px; /* Define a altura do botão */
+  border-radius: 50%; /* Faz o botão circular (metade da largura/altura) */
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  bottom: 20px; /* Posiciona no canto inferior */
+  left: 20px; /* Posiciona no canto esquerdo */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza horizontalmente */
+  text-decoration: none !important;
 }
-    
+a.back-button {
+  text-decoration: none !important;
+  display: flex;
+}
+
 .back-button::before {
   content: "←";
   font-size: 1.2em;
@@ -262,19 +268,23 @@
       }
 
       .back-button-container {
-        bottom: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
+           width: 50px; /* Reduz o tamanho do botão em telas menores */
+            height: 50px;
+            font-size: 0.9em; /* Ajusta o tamanho do texto */
+             bottom: 100px;
+           left: 50%;
+          transform: translateX(-50%);
+          z-index: 999;
+          text-decoration: none !important;
+          bottom: 70px;
       }
 
     .back-button {
-    width: 80vw; /* Aumenta o tamanho do botão em telas menores */
-    max-width: 100px; /* Limita o tamanho máximo */
-    font-size: 0.95em;
-    padding: 12px 16px; /* Ajusta o padding */
-    text-align: center;
-    border-radius: 999px; /* Mantém o botão redondo */
+    width: 50px; /* Reduz o tamanho do botão em telas menores */
+    height: 50px;
+    font-size: 0.9em; /* Ajusta o tamanho do texto */
+    text-decoration: none !important;
+ 
   }
 }
 
@@ -283,7 +293,7 @@
         font-size: 0.7em;
         text-align: center;
       }
-    }
+    
 
     @media (max-width: 480px) {
       .section-title {

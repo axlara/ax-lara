@@ -76,22 +76,24 @@ header p {
   margin-bottom: 10px;
   color: #bbb;
 }
+/* Botão Voltar */
 .btn-voltar {
   background-color: #1a1a1a;
   border: 1px solid #00fff7;
   color: #00fff7;
-  padding: 10px 16px;
-  border-radius: 999px; /* botão arredondado estilo pill */
+  width: 50px; /* Define a largura do botão */
+  height: 50px; /* Define a altura do botão */
+  border-radius: 50%; /* Faz o botão circular (metade da largura/altura) */
   font-size: 1em;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 20px; /* Posiciona no canto inferior */
+  left: 20px; /* Posiciona no canto esquerdo */
+  margin-top: -40px;
   z-index: 999;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center; /* Centraliza horizontalmente */
   text-decoration: none;
 }
 
@@ -106,6 +108,23 @@ header p {
   color: #000;
 }
 
+/* Media Queries para Responsividade */
+
+@media (max-width: 768px) {
+  .btn-voltar {
+    width: 40px; /* Reduz o tamanho do botão em telas menores */
+    height: 40px;
+    font-size: 0.9em; /* Ajusta o tamanho do texto */
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-voltar {
+    width: 30px; /* Reduz ainda mais o tamanho do botão */
+    height: 30px;
+    font-size: 0.8em; /* Ajusta o tamanho do texto */
+  }
+}
 
 footer {
   background-color: #222;
