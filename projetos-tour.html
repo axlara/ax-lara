@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projetos | Tour Virtual 360° - AIVRSE</title>
   <style>
     /* Reset básico */
@@ -22,13 +23,15 @@
       flex-direction: column;
     }
 
-    header, footer {
+    header,
+    footer {
       text-align: center;
       padding: 10px;
       background-color: #ffffff;
     }
 
-    footer, p {
+    footer,
+    p {
       color: #1a1a1a;
     }
 
@@ -39,7 +42,7 @@
 
     .projects-section {
       background-color: #0d0d0d;
-      padding: 60px 20px 40px 20px; /* Reduzi o padding inferior para não grudar no footer */
+      padding: 60px 20px 40px 20px;
       flex: 1;
       text-align: center;
     }
@@ -92,29 +95,28 @@
     }
 
     /* Grid de Cards */
-    /* Grid de Cards */
-.projects-grid {
-  display: flex;
-  flex-wrap: wrap; /* Permite quebrar linha se necessário */
-  justify-content: center; /* Centraliza horizontalmente */
-  gap: 30px; /* Espaçamento entre cards */
-  margin-top: -10px;
-  margin-bottom: 110px;
-}
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: -10px;
+      margin-bottom: 110px;
+    }
 
-/* Estilo dos Cards */
-.project-card {
-  background: #1a1a1a;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 255, 247, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  width: calc(33.33% - 20px); /* Divide a largura em 3 partes (33.33%) menos o espaçamento */
-  min-width: 300px; /* Garante um tamanho mínimo para responsividade */
-}
-  
+    /* Estilo dos Cards */
+    .project-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 255, 247, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      width: calc(33.33% - 20px);
+      min-width: 300px;
+    }
+
 
     .project-card:hover {
       transform: translateY(-8px);
@@ -171,43 +173,43 @@
       bottom: 60px;
       left: 20px;
       z-index: 999;
+
+    }
+
+    .back-button {
+      background-color: #1a1a1a;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .back-button-container a {
       text-decoration: none !important;
     }
 
-  .back-button {
-  background-color: #1a1a1a;
-  border: 1px solid #00fff7;
-  color: #00fff7;
-  width: 50px; /* Define a largura do botão */
-  height: 50px; /* Define a altura do botão */
-  border-radius: 50%; /* Faz o botão circular (metade da largura/altura) */
-  font-size: 1em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  bottom: 20px; /* Posiciona no canto inferior */
-  left: 20px; /* Posiciona no canto esquerdo */
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centraliza horizontalmente */
-  text-decoration: none !important;
-}
-a.back-button {
-  text-decoration: none !important;
-  display: flex;
-}
+    .back-button::before {
+      content: "←";
+      font-size: 1.2em;
+      display: inline-block;
+    }
 
-.back-button::before {
-  content: "←";
-  font-size: 1.2em;
-  display: inline-block;
-}
+    .back-button:hover {
+      background-color: #00fff7;
+      color: #000;
+    }
 
-.back-button:hover {
-  background-color: #00fff7;
-  color: #000;
-}
-  
 
     /* Modal estilo fullscreen */
     .modal {
@@ -245,7 +247,8 @@ a.back-button {
         max-width: 200px;
       }
 
-      .section-title, h2 {
+      .section-title,
+      h2 {
         font-size: 1.8rem;
       }
 
@@ -268,32 +271,30 @@ a.back-button {
       }
 
       .back-button-container {
-           width: 50px; /* Reduz o tamanho do botão em telas menores */
-            height: 50px;
-            font-size: 0.9em; /* Ajusta o tamanho do texto */
-             bottom: 100px;
-           left: 50%;
-          transform: translateX(-50%);
-          z-index: 999;
-          text-decoration: none !important;
-          bottom: 70px;
+        width: 50px;
+        height: 50px;
+        font-size: 0.9em;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+
+        bottom: 70px;
       }
 
-    .back-button {
-    width: 50px; /* Reduz o tamanho do botão em telas menores */
-    height: 50px;
-    font-size: 0.9em; /* Ajusta o tamanho do texto */
-    text-decoration: none !important;
- 
-  }
-}
-
-      footer {
-        padding: 15px;
-        font-size: 0.7em;
-        text-align: center;
+      .back-button {
+        width: 50px;
+        height: 50px;
+        font-size: 0.9em;
       }
-    
+    }
+
+    footer {
+      padding: 15px;
+      font-size: 0.7em;
+      text-align: center;
+    }
+
 
     @media (max-width: 480px) {
       .section-title {
@@ -315,18 +316,20 @@ a.back-button {
       .project-info p {
         font-size: 0.8em;
       }
+    }
 
-     .back-button {
-    width: 80vw; /* Aumenta o tamanho do botão em telas menores */
-    max-width: 100px; /* Limita o tamanho máximo */
-    font-size: 0.95em;
-    padding: 12px 16px; /* Ajusta o padding */
-    text-align: center;
-    border-radius: 999px; /* Mantém o botão redondo */
-  }
-}
+    @media (max-width: 480px) {
+      .back-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 0.9em;
+        padding: 0;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -341,7 +344,8 @@ a.back-button {
         <h2 class="section-title">Projetos em Tour Virtual 360°</h2>
         <p class="section-subtitle">
           Leve seus clientes para dentro do projeto com uma experiência imersiva e acessível. <br>
-          Ideal para interiores residências, comerciais e demais ambientes. <br> Navegue por todo ambiente - Visualize e acesse de qualquer dispositivo.
+          Ideal para interiores residências, comerciais e demais ambientes. <br> Navegue por todo ambiente - Visualize e
+          acesse de qualquer dispositivo.
         </p>
       </div>
     </section>
@@ -353,8 +357,10 @@ a.back-button {
         <iframe src="https://tour.panoee.net/67894c07234c0474530f4778 " allowfullscreen></iframe>
         <div class="project-info">
           <h3>Quarto Imersivo</h3>
-          <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar todos os detalhes do ambiente.</p>
-          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir Tour</button>
+          <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar
+            todos os detalhes do ambiente.</p>
+          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir
+            Tour</button>
         </div>
       </div>
 
@@ -373,14 +379,13 @@ a.back-button {
         <iframe src="tour-galeria.html" allowfullscreen></iframe>
         <div class="project-info">
           <h3>Galeria Comercial</h3>
-          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para desktop e mobile.</p>
+          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para
+            desktop e mobile.</p>
           <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
         </div>
       </div>
     </div>
   </main>
-
-  <!-- Botão Voltar posicionado abaixo dos cards -->
   <div class="back-button-container">
     <a href="index.html">
       <button class="back-button"></button>
@@ -414,7 +419,7 @@ a.back-button {
     }
 
     // Fechar modal ao clicar fora do iframe
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       const modal = document.getElementById("tourModal");
       if (event.target === modal) {
         closeModal();
@@ -423,4 +428,5 @@ a.back-button {
   </script>
 
 </body>
+
 </html>
