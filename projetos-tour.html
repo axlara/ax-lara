@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,38 +22,48 @@
       flex-direction: column;
     }
 
-    header,
-    footer {
+    header {
+      background-color: #f0f0f0;
+      color: #111;
       text-align: center;
-      padding: 10px;
-      background-color: #ffffff;
+      padding: 20px 0;
     }
 
-    footer,
-    p {
-      color: #1a1a1a;
+    header h2 {
+      font-size: 1.3rem;
+      color: #00f0ff;
+      margin: 0;
     }
 
-    header img {
-      max-width: 250px;
-      height: auto;
+    header h1 {
+      font-size: 1.5rem;
+      margin: 5px 0;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .projects-page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .projects-section {
       background-color: #0d0d0d;
       padding: 60px 20px 40px 20px;
-      flex: 1;
       text-align: center;
     }
 
-    /* Container centralizado */
     .projects-section .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    /* Título da seção */
     .section-title {
       font-size: 2.5rem;
       color: #08bac7;
@@ -62,7 +71,6 @@
       margin-bottom: 1rem;
     }
 
-    /* Subtítulo da seção */
     .section-subtitle {
       font-size: 1.2rem;
       color: #d4d1d1;
@@ -70,7 +78,6 @@
       line-height: 1.6;
     }
 
-    /* Lista de recursos */
     .features-list {
       list-style: none;
       padding: 0;
@@ -87,24 +94,24 @@
       align-items: center;
     }
 
-    /* Ícone de checkmark */
     .features-list li i {
       color: #00f0ff;
       margin-right: 10px;
       font-size: 1.1rem;
     }
 
-    /* Grid de Cards */
     .projects-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
       margin-top: -10px;
-      margin-bottom: 110px;
+      margin-bottom: 0; /* Remove espaço extra */
+      background-color: #0d0d0d;
+      padding-bottom: 40px;
+      flex: 1;
     }
 
-    /* Estilo dos Cards */
     .project-card {
       background: #1a1a1a;
       border-radius: 16px;
@@ -116,7 +123,6 @@
       width: calc(33.33% - 20px);
       min-width: 300px;
     }
-
 
     .project-card:hover {
       transform: translateY(-8px);
@@ -167,13 +173,11 @@
       background-color: #00cccc;
     }
 
-    /* Botão Voltar */
     .back-button-container {
       position: absolute;
-      bottom: 60px;
+      bottom: 20px;
       left: 20px;
       z-index: 999;
-
     }
 
     .back-button {
@@ -186,17 +190,9 @@
       font-size: 1em;
       cursor: pointer;
       transition: all 0.3s ease;
-      bottom: 20px;
-      left: 20px;
-      z-index: 999;
       display: flex;
       align-items: center;
       justify-content: center;
-
-    }
-
-    .back-button-container a {
-      text-decoration: none !important;
     }
 
     .back-button::before {
@@ -210,8 +206,6 @@
       color: #000;
     }
 
-
-    /* Modal estilo fullscreen */
     .modal {
       position: fixed;
       top: 0;
@@ -241,47 +235,37 @@
       cursor: pointer;
     }
 
-    /* === RESPONSIVIDADE PARA MOBILE === */
-    @media (max-width: 768px) {
-      header img {
-        max-width: 200px;
-      }
+    footer {
+      background-color: #ffffff;
+      color: #1a1a1a;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.7em;
+      margin-top: auto;
+    }
 
-      .section-title,
-      h2 {
+    @media (max-width: 768px) {
+      .section-title, h2 {
         font-size: 1.8rem;
       }
-
       .section-subtitle {
         font-size: 1em;
         text-align: center;
       }
-
-      .project-card iframe,
-      .project-card img {
+      .project-card iframe, .project-card img {
         height: 220px;
       }
-
       .project-info h3 {
         font-size: 1.1em;
       }
-
       .project-info p {
         font-size: 0.85em;
       }
-
       .back-button-container {
-        width: 50px;
-        height: 50px;
-        font-size: 0.9em;
-        bottom: 100px;
+        bottom: 70px;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 999;
-
-        bottom: 70px;
       }
-
       .back-button {
         width: 50px;
         height: 50px;
@@ -289,36 +273,22 @@
       }
     }
 
-    footer {
-      padding: 15px;
-      font-size: 0.7em;
-      text-align: center;
-    }
-
-
     @media (max-width: 480px) {
       .section-title {
         font-size: 1.7em;
       }
-
       .section-subtitle {
         font-size: 0.9em;
       }
-
       header img {
         width: 80%;
       }
-
       .project-info h3 {
         font-size: 1em;
       }
-
       .project-info p {
         font-size: 0.8em;
       }
-    }
-
-    @media (max-width: 480px) {
       .back-button {
         width: 50px;
         height: 50px;
@@ -329,19 +299,19 @@
     }
   </style>
 </head>
-
 <body>
 
   <header>
-    <div class="logo">
-      <img src="/imagens/logoaivrse1.png" alt="logoaivrse">
-    </div>
+    <h2>AX-LARA</h2>
+    <h1>Architect of Xperience</h1>
+    <p>by Lara E. Negreiros</p>
   </header>
 
   <main class="projects-page">
+
     <section class="projects-section">
       <div class="container">
-        <h2 class="section-title">Projetos em Tour Virtual 360°</h2>
+        <h2 class="section-title">Projetos 3D & Tour 360°</h2>
         <p class="section-subtitle">
           Leve seus clientes para dentro do projeto com uma experiência imersiva e acessível. <br>
           Ideal para interiores residências, comerciais e demais ambientes. <br> Navegue por todo ambiente - Visualize e
@@ -352,6 +322,7 @@
 
     <!-- Grid de Cards -->
     <div class="projects-grid">
+
       <!-- Projeto 1 -->
       <div class="project-card">
         <iframe src="https://tour.panoee.net/67894c07234c0474530f4778 " allowfullscreen></iframe>
@@ -359,8 +330,7 @@
           <h3>Quarto Imersivo</h3>
           <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar
             todos os detalhes do ambiente.</p>
-          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir
-            Tour</button>
+          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir Tour</button>
         </div>
       </div>
 
@@ -379,31 +349,45 @@
         <iframe src="tour-galeria.html" allowfullscreen></iframe>
         <div class="project-info">
           <h3>Galeria Comercial</h3>
-          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para
-            desktop e mobile.</p>
+          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para desktop e mobile.</p>
           <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
         </div>
-        </div>
+      </div>
 
-        <div class="project-card">
+      <!-- Projeto 4 -->
+      <div class="project-card">
         <iframe src="tour-salahightec.html" allowfullscreen></iframe>
         <div class="project-info">
           <h3>Sala Hightech</h3>
-          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para
-            desktop e mobile.</p>
+          <p>Modelagem 3D e otimização para uma animação interativa em realidade aumentada. Ambiente futurista desenvolvido para uma feira de medicina universitária, permitindo a exploração de uma sala cirúrgica high-tech através de experiências imersivas.</p>
           <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
         </div>
-      
+      </div>
+
+      <!-- Projeto 5 -->
+      <div class="project-card">
+        <iframe src="tour-office.html" allowfullscreen></iframe>
+        <div class="project-info">
+          <h3>Office 360°</h3>
+          <p>Visualização em 360° de um escritório decorado.</p>
+          <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
+        </div>
+      </div>
+
     </div>
+
   </main>
+
+  <!-- Botão Voltar -->
   <div class="back-button-container">
     <a href="index.html">
       <button class="back-button"></button>
     </a>
   </div>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 AIVRSE | Studio de Experiências Imersivas</p>
+    <p>&copy; 2025 AX-LARA | Studio de Experiências Imersivas</p>
   </footer>
 
   <!-- Modal -->
@@ -428,8 +412,7 @@
       modal.style.display = "none";
     }
 
-    // Fechar modal ao clicar fora do iframe
-    window.onclick = function (event) {
+    window.onclick = function(event) {
       const modal = document.getElementById("tourModal");
       if (event.target === modal) {
         closeModal();
@@ -438,5 +421,4 @@
   </script>
 
 </body>
-
 </html>
