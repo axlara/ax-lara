@@ -3,9 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projetos | Tour Virtual 360° - AIVRSE</title>
+  <meta name="description" content="Criação de tours virtuais 360°, modelagens 3D e páginas interativas para arquitetos, designers e artistas">
+  <meta name="keywords" content="tour virtual, 360, modelagem 3D, realidade virtual, arquitetura digital">
+  <title>AX-LARA Studio | Experiências Imersivas em 360°</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    /* Reset básico */
+    :root {
+      --primary: #00fff7;
+      --primary-dark: #00cccc;
+      --secondary: #25d366;
+      --dark: #0d0d0d;
+      --dark-light: #1a1a1a;
+      --light: #f0f0f0;
+      --gray: #ccc;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,9 +26,10 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      color: #f0f0f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
       position: relative;
       min-height: 100vh;
       display: flex;
@@ -23,409 +37,681 @@
     }
 
     header {
-      background-color: #f0f0f0;
-      color: #111;
+      background-color: rgba(26, 26, 26, 0.185);
+      color: var(--light);
       text-align: center;
-      padding: 20px 0;
+      padding: 25px 0;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(0, 255, 247, 0.1);
     }
 
-    header h2 {
-      font-size: 1.3rem;
-      color: #00f0ff;
-      margin: 0;
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
     }
 
     header h1 {
-      font-size: 1.5rem;
-      margin: 5px 0;
+      font-size: 1.2rem;
+      color: var(--light);
+      font-weight: 400;
+      letter-spacing: 0.5px;
     }
 
     header p {
       font-size: 0.9rem;
-      color: #555;
-      margin: 5px 0;
+      color: var(--gray);
+      margin-top: 5px;
+      font-style: italic;
     }
 
-    .projects-page {
-      flex: 1;
-      display: flex;
+    /* Botão Hamburguer */
+    .menu-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--light);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      background-color: rgba(26, 26, 26, 0.95);
+      min-width: 180px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px 0;
+      display: none;
       flex-direction: column;
+      z-index: 999;
+      border: 1px solid rgba(0, 255, 247, 0.2);
     }
 
-    .projects-section {
-      background-color: #0d0d0d;
-      padding: 60px 20px 40px 20px;
+    .dropdown-menu a {
+      color: var(--light);
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: rgba(0, 255, 247, 0.1);
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero-wrapper {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 100px); /* Reduzi a altura */
+      margin-top: -100px; /* Espaço para o header */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
       text-align: center;
+      padding: 60px 20px;
+      color: white;
     }
 
-    .projects-section .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .hero h2 {
+      color: var(--primary);
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 15px rgba(0, 255, 247, 0.5);
     }
 
-    .section-title {
-      font-size: 2.5rem;
-      color: #08bac7;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      font-size: 1.2rem;
-      color: #d4d1d1;
-      margin-bottom: 2rem;
+    .hero p {
+      color: var(--gray);
+      max-width: 1000px;
+      margin: 0 auto 30px;
+      font-size: 1.15em;
       line-height: 1.6;
     }
 
-    .features-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto 2rem auto;
+    .cta-button {
       display: inline-block;
-      text-align: left;
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 255, 247, 0.3);
     }
 
-    .features-list li {
-      font-size: 1rem;
-      color: #dad6d6;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 255, 247, 0.4);
+      background-color: var(--primary-dark);
     }
 
-    .features-list li i {
-      color: #00f0ff;
-      margin-right: 10px;
-      font-size: 1.1rem;
+    /* Restante do seu CSS permanece igual */
+    .packages {
+      padding: 60px 20px;
+      background-color: #111;
     }
 
-    .projects-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    .section-title {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2em;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .section-title:after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      margin: 15px auto;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
-      margin-top: -10px;
-      margin-bottom: 0; /* Remove espaço extra */
-      background-color: #0d0d0d;
-      padding-bottom: 40px;
-      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .project-card {
-      background: #1a1a1a;
+    .package-card {
+      background-color: var(--dark-light);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 255, 247, 0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #333;
+    }
+
+    .package-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 255, 247, 0.2);
+    }
+
+    .package-badge {
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 8px 15px;
+      display: inline-block;
+      font-weight: bold;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .package-content {
+      padding: 25px;
+    }
+
+    .package-title {
+      color: var(--primary);
+      font-size: 1.4em;
+      margin-bottom: 15px;
+    }
+
+    .package-description {
+      color: var(--gray);
+      font-size: 0.95em;
+      margin-bottom: 20px;
+    }
+
+    .package-features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .package-features li {
+      padding: 8px 0;
+      color: var(--gray);
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .package-features li:before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+    }
+
+    .preview-image {
+      margin-top: 15px;
+    }
+
+    .preview-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .package-actions {
       display: flex;
       flex-direction: column;
-      width: calc(33.33% - 20px);
-      min-width: 300px;
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(0, 255, 247, 0.25);
-    }
-
-    .project-card iframe,
-    .project-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border: none;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-    }
-
-    .project-info {
-      padding: 25px 20px;
-      flex-grow: 1;
-    }
-
-    .project-info h3 {
-      font-size: 1.4em;
-      color: #00fff7;
-      margin-bottom: 10px;
-    }
-
-    .project-info p {
-      font-size: 0.95em;
-      color: #dddddd;
-    }
-
-    .expand-btn {
+      gap: 10px;
       margin-top: 15px;
-      padding: 10px 16px;
-      background-color: #99999917;
-      border: 1px solid #00fff7;
-      color: #00fff7;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    }
+
+    .contact-form {
+      background-color: #000;
+      padding: 60px 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-control {
       width: 100%;
+      padding: 15px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: var(--dark-light);
+      color: var(--light);
+      font-size: 1em;
+      transition: border 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
       font-size: 1em;
     }
 
-    .expand-btn:hover {
-      background-color: #00cccc;
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--dark);
     }
 
-    .back-button-container {
-      position: absolute;
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 247, 0.3);
+    }
+
+    .btn-whatsapp {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1ebe5b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-voltar {
+      background-color: #1a1a1a;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
       bottom: 20px;
       left: 20px;
+      margin-top: -40px;
       z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
     }
 
-    .back-button-container a {
-    text-decoration: none;
-}
-   .back-button {
-  background-color: #1a1a1a;
-  border: 1px solid #00fff7; 
-  color: #00fff7;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 1em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-   margin-bottom: 40px;
-}
-    .back-button::before {
+    .btn-voltar::before {
       content: "←";
       font-size: 1.2em;
       display: inline-block;
     }
 
-    .back-button:hover {
+    .btn-voltar:hover {
       background-color: #00fff7;
       color: #000;
     }
 
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.95);
-      z-index: 1000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal iframe {
-      width: 90vw;
-      height: 90vh;
-      border: none;
-      border-radius: 12px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-    }
-
     footer {
-      background-color: #ffffff;
-      color: #1a1a1a;
+      background-color: var(--light);
+      color: var(--dark);
       text-align: center;
-      padding: 15px;
-      font-size: 0.7em;
+      padding: 20px;
       margin-top: auto;
     }
 
-    @media (max-width: 768px) {
-      .section-title, h2 {
-        font-size: 1.8rem;
+    .social-links {
+      margin: 15px 0;
+    }
+
+    .social-links a {
+      color: var(--dark);
+      margin: 0 10px;
+      font-size: 1.2em;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+    }
+
+    .float-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--secondary);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .float-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
       }
-      .section-subtitle {
-        font-size: 1em;
-        text-align: center;
-      }
-      .project-card iframe, .project-card img {
-        height: 220px;
-      }
-      .project-info h3 {
-        font-size: 1.1em;
-      }
-      .project-info p {
-        font-size: 0.85em;
-      }
-      .back-button-container {
-        bottom: 70px;
-        left: 10%;
-        transform: translateX(-50%);
-      }
-      .back-button {
-        width: 50px;
-        height: 50px;
-        font-size: 0.9em;
-        text-decoration: none;
-        margin-bottom: -10px;
+      textarea.form-control {
+        grid-column: span 2;
       }
     }
 
-    @media (max-width: 480px) {
-      .section-title {
-        font-size: 1.7em;
+    @media (max-width: 576px) {
+      .hero h2 {
+        font-size: 1.8em;
       }
-      .section-subtitle {
-        font-size: 0.9em;
+      .package-actions {
+        flex-direction: column;
       }
-      header img {
-        width: 80%;
-      }
-      .project-info h3 {
-        font-size: 1em;
-      }
-      .project-info p {
-        font-size: 0.8em;
-      }
-      .back-button {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 0.9em;
-        padding: 0;
-        text-decoration: none;
+      .hero-wrapper {
+        height: calc(100vh - 80px);
+        margin-top: 80px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <h2>AX-LARA</h2>
-    <h1>Architect of Xperience</h1>
-    <p>by Lara E. Negreiros</p>
+    <div class="container">
+      <div class="logo">AX-LARA STUDIO</div>
+      <h1>Tours 360° | Sites Interativos | Modelagem 3D</h1>
+      <p>Freelancer | Design de Experiência | Arquitetura Digital</p>
+
+      <!-- Botão Hamburguer sempre visível -->
+      <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <nav id="dropdown-menu" class="dropdown-menu">
+        <a href="#pacotes">Pacotes</a>
+        <a href="portproj.html">Portfólio</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="projects-page">
+<!-- Hero Section com Background Animado -->
+<div class="hero-wrapper">
+  <!-- Background Animado -->
+  <div id="particles-js"></div>
 
-    <section class="projects-section">
-      <div class="container">
-        <h2 class="section-title">Projetos 3D & Tour 360°</h2>
-        <p class="section-subtitle">
-          Leve seus clientes para dentro do projeto com uma experiência imersiva e acessível. <br>
-          Ideal para interiores residências, comerciais e demais ambientes. <br> Navegue por todo ambiente - Visualize e
-          acesse de qualquer dispositivo.
+  <!-- Conteúdo da Hero -->
+  <section class="hero">
+    <h2>Impulsione seus projetos com inovação digital</h2>
+    <p>Transformo suas ideias em experiências imersivas com tours virtuais, páginas interativas e modelos 3D. Ideal para profissionais que desejam apresentar seus projetos de forma estratégica e fortalecer sua presença no mundo digital.</p>
+    <a href="#pacotes" class="cta-button">Conheça nossos Pacotes</a>
+  </section>
+</div>
+
+<!-- Restante do seu HTML permanece igual -->
+  <!-- Pacotes Section -->
+  <section id="pacotes" class="packages">
+    <h2 class="section-title">Nossos Pacotes</h2>
+    <div class="packages-grid">
+
+    <!-- Pacote 1 -->
+    <div class="package-card">
+      <div class="package-badge">Mais Completo</div>
+      <div class="package-content">
+        <h3 class="package-title">1. Imersão Pro</h3>
+        <p class="package-description">
+          Pacote completo com tour 360°, site personalizado e otimização da modelagem 3D com render incluso. Ideal para quem quer presença digital imersiva e profissional.
         </p>
-      </div>
-    </section>
-
-    <!-- Grid de Cards -->
-    <div class="projects-grid">
-
-      <!-- Projeto 1 -->
-      <div class="project-card">
-        <iframe src="https://tour.panoee.net/67894c07234c0474530f4778 " allowfullscreen></iframe>
-        <div class="project-info">
-          <h3>Quarto Imersivo</h3>
-          <p>Tour virtual com navegação livre e controle de movimentação horizontal e vertical, permitindo explorar
-            todos os detalhes do ambiente.</p>
-          <button class="expand-btn" onclick="openModal('https://tour.panoee.net/67894c07234c0474530f4778 ')">Abrir Tour</button>
+        <ul class="package-features">
+          <li>Otimização da modelagem 3D (com render)</li>
+          <li>Tour virtual 360° interativo</li>
+          <li>Site completo personalizado com hospedagem por 1 ano</li>
+        </ul>
+        <div class="preview-image">
+          <img src="/imagens/screenshot.png" alt="Exemplo de tour e site integrado">
+        </div>
+        <div class="package-actions">
+          <a href="https://galeriajardins.com.br/" target="_blank" class="btn btn-primary">Ver Modelo</a>
         </div>
       </div>
-
-      <!-- Projeto 2 -->
-      <div class="project-card">
-        <iframe src="tour-sala.html" allowfullscreen></iframe>
-        <div class="project-info">
-          <h3>Ambiente Residencial</h3>
-          <p>Apartamento decorado com visualização panorâmica em 360°.</p>
-          <button class="expand-btn" onclick="openModal('tour-sala.html')">Abrir Tour</button>
-        </div>
-      </div>
-
-      <!-- Projeto 3 -->
-      <div class="project-card">
-        <iframe src="tour-galeria.html" allowfullscreen></iframe>
-        <div class="project-info">
-          <h3>Galeria Comercial</h3>
-          <p>Exploração completa de um espaço comercial através de pontos de transição e rotação livre, otimizada para desktop e mobile.</p>
-          <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
-        </div>
-      </div>
-
-      <!-- Projeto 4 -->
-      <div class="project-card">
-        <iframe src="tour-salahightec.html" allowfullscreen></iframe>
-        <div class="project-info">
-          <h3>Sala Hightech</h3>
-          <p>Modelagem 3D e otimização para uma animação interativa em realidade aumentada. Ambiente futurista desenvolvido para uma feira de medicina universitária, permitindo a exploração de uma sala cirúrgica high-tech através de experiências imersivas.</p>
-          <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
-        </div>
-      </div>
-
-      <!-- Projeto 5 -->
-      <div class="project-card">
-        <iframe src="tour-office.html" allowfullscreen></iframe>
-        <div class="project-info">
-          <h3>Office 360°</h3>
-          <p>Visualização em 360° de um escritório decorado.</p>
-          <button class="expand-btn" onclick="openModal('tour-galeria.html')">Abrir Tour</button>
-        </div>
-      </div>
-
     </div>
 
-  </main>
+    <!-- Pacote 2 -->
+    <div class="package-card">
+      <div class="package-content">
+        <h3 class="package-title">2. Presença Digital</h3>
+        <p class="package-description">Apresente seu negócio com uma landing page responsiva, integrada ao seu tour virtual e com base em sua identidade visual já existente.</p>
+        <ul class="package-features">
+          <li>Tour virtual incorporado (imagens fornecidas por você)</li>
+          <li>Layout responsivo baseado na sua marca e identidade</li>
+          <li>Publicação de uma página única com seus conteúdos</li>
+        </ul>
+        <div class="preview-image">
+          <img src="/imagens/printpacote2.png" alt="Landing page responsiva">
+        </div>
+        <div class="package-actions">
+          <a href="landinhpage.html" target="_blank" class="btn btn-primary">Ver Modelo</a>
+        </div>
+      </div>
+    </div>
 
-  <!-- Botão Voltar -->
-  <div class="back-button-container">
-    <a href="index.html">
-      <button class="back-button"></button>
-    </a>
-  </div>
+    <!-- Pacote 3 -->
+    <div class="package-card">
+      <div class="package-content">
+        <h3 class="package-title">3. Tour Essencial</h3>
+        <p class="package-description">
+          Tour virtual 360° funcional e acessível com duas opções: você envia as imagens ou entregamos o tour renderizado a partir da sua modelagem. Ideal para apresentações rápidas e eficazes.
+        </p>
+        <ul class="package-features">
+          <li>Montagem do tour virtual 360° personalizado</li>
+          <li>Link compartilhável pronto para divulgar</li>
+          <li>Personalização básica</li>
+        </ul>
+        <div class="preview-tour">
+          <iframe 
+            src="https://tour.panoee.net/67894c07234c0474530f4778" 
+            width="100%" 
+            height="200" 
+            frameborder="0" 
+            allowfullscreen 
+            style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
+          </iframe>
+        </div>
+        <div class="package-actions">
+          <a href="https://tour.panoee.net/67894c07234c0474530f4778" target="_blank" class="btn btn-primary">Ver Modelo</a>
+        </div>
+      </div>
+    </div>
 
+    </div>
+  </section>
+
+  <!-- Formulário de Contato -->
+  <section id="contato" class="contact-form">
+    <h2 class="section-title">Solicite um Orçamento</h2>
+    <form class="form-grid">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Seu nome completo" required>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Seu melhor e-mail" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" class="form-control" placeholder="WhatsApp (opcional)">
+      </div>
+      <div class="form-group">
+        <select class="form-control" required>
+          <option value="">Selecione um pacote</option>
+          <option value="imersao">Imersão Total</option>
+          <option value="presenca">Presença Digital</option>
+          <option value="essencial">Tour Essencial</option>
+          <option value="personalizado">Projeto Personalizado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Descreva seu projeto, dimensões e necessidades especiais"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="file" id="project-files" class="form-control">
+        <label for="project-files" style="color: var(--gray); font-size: 0.9em;">Anexe referências (opcional)</label>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+      </div>
+    </form>
+    <a href="index.html" class="btn-voltar"></a>
+  </section>
+
+  <!-- Botão flutuante do WhatsApp -->
+<a href="https://wa.me/5584996249406" class="float-whatsapp" title="Fale pelo WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 AX-LARA | Studio de Experiências Imersivas</p>
+    <p>&copy; 2025 AX-LARA Studio | Todos os direitos reservados</p>
   </footer>
 
-  <!-- Modal -->
-  <div id="tourModal" class="modal">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-  <!-- Script do Modal -->
+  <!-- Script para abrir/fechar o dropdown -->
   <script>
-    function openModal(url) {
-      const modal = document.getElementById("tourModal");
-      const iframe = document.getElementById("modalIframe");
-      iframe.src = url;
-      modal.style.display = "flex";
-    }
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
 
-    function closeModal() {
-      const modal = document.getElementById("tourModal");
-      const iframe = document.getElementById("modalIframe");
-      iframe.src = "";
-      modal.style.display = "none";
-    }
+    menuToggle.addEventListener('click', () => {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
 
-    window.onclick = function(event) {
-      const modal = document.getElementById("tourModal");
-      if (event.target === modal) {
-        closeModal();
+    // Fecha o menu se o usuário clicar fora dele
+    document.addEventListener('click', (e) => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownMenu.style.display = 'none';
       }
-    }
+    });
   </script>
 
+<!-- Configuração do Particles.js -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 300,
+        "density": {
+          "enable": true,
+          "value_area": 1500
+        }
+      },
+      "color": {
+        "value": "#ffffff"
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        }
+      },
+      "opacity": {
+        "value": 0.8,
+        "random": true,
+        "anim": {
+          "enable": false
+        }
+      },
+      "size": {
+        "value": 1.5,
+        "random": true,
+        "anim": {
+          "enable": false
+        }
+      },
+      "line_linked": {
+        "enable": false
+      },
+      "move": {
+        "enable": true,
+        "speed": 0.3,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": true,
+          "rotateX": 2000,
+          "rotateY": 2000
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": false
+        },
+        "onclick": {
+          "enable": false
+        }
+      }
+    },
+    "retina_detect": true
+  });
+});
+</script>
 </body>
 </html>
