@@ -39,31 +39,73 @@
       backdrop-filter: blur(5px);
       border-bottom: 1px solid rgba(0, 255, 247, 0.1);
     }
-    .logo {
-      font-family: monospace;
-      font-size: 1.4rem;
-      letter-spacing: 6px;
+         .logo {
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
       font-weight: 700;
-      color: var(--primary-dark);
-      text-shadow: 1px 1px 0px #ccc, 
-                   2px 2px 0px #bbb, 
-                   3px 3px 0px #999, 
-                   4px 4px 5px rgba(0, 0, 0, 0.2);
+      color: var(--light);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 5px;
+      text-transform: uppercase;
     }
+
+    .logo i {
+      font-style: normal;
+      color: var(--primary);
+      display: inline-block;
+      transform: translateZ(0);
+      text-shadow: 
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px rgba(0, 255, 247, 0.5);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% {
+        text-shadow: 
+          0 0 5px var(--primary),
+          0 0 10px var(--primary),
+          0 0 20px var(--primary),
+          0 0 40px rgba(0, 255, 247, 0.5);
+      }
+      100% {
+        text-shadow: 
+          0 0 10px var(--primary),
+          0 0 20px var(--primary),
+          0 0 30px var(--primary),
+          0 0 50px rgba(0, 255, 247, 0.8);
+      }
+    }
+
     .logo::after {
       content: "";
       position: absolute;
-      bottom: -3px;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 2px;
-      background: var(--primary);
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
       transform: scaleX(0);
-      transition: transform 0.3s ease;
+      transition: transform 0.6s ease;
     }
+
     .logo:hover::after {
       transform: scaleX(1);
     }
+
+    .logo-subtitle {
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+  font-size: 0.8em; /* Tamanho reduzido */
+  letter-spacing: 1px;
+  font-weight: 400;
+  color: var(--primary-dark); /* Cor mais suave */
+  /* text-transform: lowercase; */
+  margin-left: 4px;
+}
     header h1 {
       font-size: 1.2rem;
       color: var(--light);
@@ -288,7 +330,7 @@
   <!-- Header -->
   <header>
     <div class="container">
-      <div class="logo">AX-LARA STUDIO</div>
+      <div class="logo">A<i>X</i>LARA<span class="logo-subtitle"> studio digital</span></div>
       <h1>Portfólio em construção...</h1>
     </div>
   </header>
