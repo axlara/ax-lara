@@ -6,6 +6,7 @@
     <title>Tour Virtual - Galeria Jardins</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css" />
     <style>
+        
         body {
             margin: 0;
             padding: 0;
@@ -21,56 +22,57 @@
             height: 100vh;
         }
         /* Hotspot de navegação com estilo game/sci-fi */
-        .nav-hotspot {
-            height: 58px;
-            width: 58px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #f8f8f859, #a7a7a7);
-            border: 2px solid #6cf0fa59;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow:
-                0 0 8px rgba(185, 255, 255, 0.6),
-                0 0 12px rgba(0, 255, 255, 0.4),
-                inset 0 0 6px rgba(77, 77, 77, 0.973);
-            transform-style: preserve-3d;
-        }
+     .nav-hotspot {
+    height: 58px;
+    width: 58px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #f8f8f859, #a7a7a7);
+    border: 2px solid #6cf0fa59;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 8px rgba(185, 255, 255, 0.6),
+        0 0 12px rgba(0, 255, 255, 0.4),
+        inset 0 0 6px rgba(77, 77, 77, 0.973);
+    transform-style: preserve-3d;
+}
 
-        .nav-hotspot:hover {
-            transform: scale(1.15) rotateX(8deg);
-            background: radial-gradient(circle at 30% 30%, #ecf1f1, #002e35);
-            box-shadow:
-                0 0 12px rgba(0, 255, 255, 0.8),
-                0 0 20px rgba(0, 255, 255, 0.5),
-                inset 0 0 10px rgba(0, 255, 255, 0.4);
-        }
+.nav-hotspot:hover {
+    transform: scale(1.15) rotateX(8deg);
+    background: radial-gradient(circle at 30% 30%, #ecf1f1, #002e35);
+    box-shadow:
+        0 0 12px rgba(0, 255, 255, 0.8),
+        0 0 20px rgba(0, 255, 255, 0.5),
+        inset 0 0 10px rgba(0, 255, 255, 0.4);
+}
 
-        /* Ícone dentro do botão - pode ser ajustado com SVG */
-        .nav-hotspot .icon {
-            width: 28px;
-            height: 28px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300f0ff"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            margin-bottom: 4px;
-            filter: drop-shadow(0 0 2px #303030);
-        }
+/* Ícone dentro do botão - pode ser ajustado com SVG */
+.nav-hotspot .icon {
+    width: 28px;
+    height: 28px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300f0ff"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 0 2px #303030);
+}
 
-        /* Label com estilo sci-fi */
-        .nav-hotspot .label {
-            color: #5a5959;
-            font-size: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-shadow: 0 0 4px rgb(110, 247, 240);
-            text-align: center;
-            line-height: 1;
-        }
+/* Label com estilo sci-fi */
+.nav-hotspot .label {
+    color: #5a5959;
+    font-size: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-shadow: 0 0 4px rgb(110, 247, 240);
+    text-align: center;
+    line-height: 1;
+}
 
+    
         /* Hotspot de informação */
         .info-hotspot {
             height: 40px;
@@ -121,7 +123,6 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
-
         /* Estilo para Mobile - Setas estilo Street View */
         @media only screen and (max-width: 768px) {
             .nav-hotspot {
