@@ -272,7 +272,6 @@
       font-size: 1.1em;
       line-height: 1.6;
     }
-
     .cta-buttons {
       display: flex;
       gap: 20px;
@@ -298,17 +297,34 @@
       background-color: var(--primary-dark);
     }
 
-    .portfolio-button {
-      background-color: var(--portfolio-accent);
-      color: white;
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    }
+  /* Adicione este estilo ao seu CSS */
+.portfolio-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
+    color: white;
+    box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
 
-    .portfolio-button:hover {
-      background-color: #ff5252;
-      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-    }
+.portfolio-button i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
 
+.portfolio-button:hover {
+    background: linear-gradient(135deg, #88d3ce, #6e45e2);
+    box-shadow: 0 6px 20px rgba(110, 69, 226, 0.6);
+    transform: translateY(-3px);
+}
     /* Pacotes Section */
     .packages {
       padding: 80px 20px;
@@ -677,31 +693,7 @@
       box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
     }
 
-    /* Botão flutuante do Portfólio */
-    .float-portfolio {
-      position: fixed;
-      bottom: 110px;
-      right: 30px;
-      background-color: var(--portfolio-accent);
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-      z-index: 1000;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
-
-    .float-portfolio:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-    }
-
+ 
     /* Responsividade */
     @media (max-width: 767px) {
       /* Header mobile */
@@ -864,7 +856,7 @@
       <p>Transformo suas ideias em experiências imersivas com tours virtuais, páginas interativas e modelos 3D. Ideal para profissionais que desejam apresentar seus projetos de forma estratégica e fortalecer sua presença no mundo digital.</p>
       <div class="cta-buttons">
         <a href="#pacotes" class="cta-button">Conheça nossos Pacotes</a>
-        <a href="portproj.html" class="cta-button portfolio-button">Ver Portfólio</a>
+       <a href="portproj.html" class="portfolio-button"> Ver Portfólio</a>
       </div>
     </section>
   </div>
@@ -982,11 +974,6 @@
   <!-- Botão flutuante do WhatsApp -->
   <a href="https://wa.me/5584996249406" class="float-whatsapp" title="Fale pelo WhatsApp">
     <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Botão flutuante do Portfólio -->
-  <a href="portproj.html" class="float-portfolio" title="Ver Portfólio">
-    <i class="fas fa-images"></i>
   </a>
 
   <!-- Footer -->

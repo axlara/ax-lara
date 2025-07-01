@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perfil Técnico - AX-LARA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio Freelancer - AX-LARA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
+    :root {
+      --primary: #00f0ff;
+      --primary-dark: #08bac7;
+      --secondary: #25d366;
+      --portfolio-accent: #6e45e2;
+      --portfolio-accent-light: #88d3ce;
+      --dark: #111;
+      --light: #f0f0f0;
+      --gray: #ccc;
+    }
+
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #111;
-      color: #ccc;
+      background-color: var(--dark);
+      color: var(--gray);
       line-height: 1.7;
     }
 
     header {
-      background-color: #f0f0f0;
-      color: #111;
+      background-color: var(--light);
+      color: var(--dark);
       text-align: center;
       padding: 10px 10px;
-    }
-
-    header h2 {
-      font-size: 1.3rem;
-      color: #00f0ff;
-      margin: 0;
+      position: relative;
     }
 
     header h1 {
       font-size: 1.5rem;
-      margin: 5px 0;
+      margin: 0;
     }
+    
+ header h2 {
+  font-size: 1.3rem;
+  color: var(--dark); /* Texto principal em preto */
+  margin: 0;
+  letter-spacing: 1px;
+}
 
+header h2 span {
+  color: var(--primary); /* X em azul */
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+}
     header p {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #555;
-      margin: 5px 0;
+      margin-top: 5px;
     }
 
     .container {
@@ -58,29 +76,124 @@
       margin-bottom: 15px;
     }
 
+    /* Botão do Portfólio */
+    .btn-portfolio {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--portfolio-accent), var(--portfolio-accent-light));
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 20px 0;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-portfolio:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(110, 69, 226, 0.6);
+      background: linear-gradient(135deg, var(--portfolio-accent-light), var(--portfolio-accent));
+    }
+
+    .btn-portfolio i {
+      margin-right: 8px;
+    }
+
     .section {
       margin-bottom: 40px;
     }
 
     .section h2 {
       font-size: 1.5rem;
-      color: #00f0ff;
+      color: var(--primary);
       margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
     }
 
     .section ul {
-      list-style-type: disc;
-      padding-left: 20px;
+      list-style-type: none;
+      padding-left: 0;
     }
 
     .section li {
       margin-bottom: 10px;
       color: #bbb;
+      padding-left: 25px;
+      position: relative;
     }
 
-    /* Botão Voltar */
+    .section li::before {
+      content: "→";
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+    }
+
+    footer {
+      background-color: #222;
+      color: var(--gray);
+      text-align: center;
+      padding: 10px;
+    }
+
+    .social-icons {
+      margin: 15px 0;
+    }
+
+    .social-icons a {
+      color: var(--primary);
+      font-size: 30px;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Botão flutuante do WhatsApp */
+    .float-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--secondary);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .float-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
     .btn-voltar {
-      background-color: #1a1a1a;
+      background-color: #1a1a1a8c;
       border: 1px solid #00fff7;
       color: #00fff7;
       width: 50px;
@@ -89,9 +202,9 @@
       font-size: 1em;
       cursor: pointer;
       transition: all 0.3s ease;
-      bottom: 20px;
-      left: 20px;
-      margin-top: -40px;
+      margin-bottom: 20px;
+      margin-left: 30px;
+      margin-top: -70px;
       z-index: 999;
       display: flex;
       align-items: center;
@@ -109,191 +222,78 @@
       background-color: #00fff7;
       color: #000;
     }
-
-    /* Media Queries para Responsividade */
-
-    @media (max-width: 768px) {
-      .btn-voltar {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .btn-voltar {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 0.9em;
-        padding: 0;
-      }
-    }
-
-    footer {
-      background-color: #222;
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-    }
-
-    footer .social-icons i {
-      color: #00f0ff;
-      font-size: 30px;
-      margin: 0 15px;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    footer .social-icons i:hover {
-      color: #08bac7;
-    }
-
-    /* === RESPONSIVIDADE PARA MOBILE === */
-    @media (max-width: 768px) {
-      header {
-        padding: 10px;
-      }
-
-      header h2 {
-        font-size: 1.2rem;
-      }
-
+    /* Responsividade */
+    @media (max-width: 767px) {
       header h1 {
         font-size: 1.3rem;
       }
-
+      
+      header h2 {
+        font-size: 1.1rem;
+      }
+      
       header p {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
-
-      .container {
-        padding: 10px;
-      }
-
+      
       .intro p {
         font-size: 1rem;
       }
-
-      .section h2 {
-        font-size: 1.3rem;
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-
-      .section ul {
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-
-      .section li {
+      
+      .btn-portfolio {
+        padding: 10px 20px;
         font-size: 0.9rem;
       }
-
-      footer .social-icons i {
-        font-size: 24px;
+      
+      .section h2 {
+        font-size: 1.3rem;
+      }
+      
+      .float-whatsapp {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        bottom: 20px;
+        right: 20px;
       }
     }
   </style>
 </head>
-
 <body>
-  <!-- Barra de Idiomas -->
-  <div class="language-bar">
-    <button onclick="translateTo('en')" aria-label="English">
-      <img src="https://flagcdn.com/gb.svg" alt="English" width="24" height="16">
-    </button>
-    <button onclick="translateTo('es')" aria-label="Español">
-      <img src="https://flagcdn.com/es.svg" alt="Español" width="24" height="16">
-    </button>
-  </div>
-
-  <style>
-    .language-bar {
-      position: fixed;
-      top: 10px;
-      right: 15px;
-      z-index: 1000;
-      display: flex;
-      gap: 1px;
-      background: none;
-    }
-
-    .language-bar button {
-      background: none;
-      border: none;
-      padding: 2px;
-      cursor: pointer;
-    }
-
-    .language-bar button:hover {
-      opacity: 0.7;
-    }
-  </style>
-  <!-- Google Translate Script -->
-  <div id="google_translate_element" style="display: none;"></div>
-
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'pt',
-        includedLanguages: 'en,es,pt',
-        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-
-    (function () {
-      var gt = document.createElement('script');
-      gt.type = 'text/javascript';
-      gt.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      document.body.appendChild(gt);
-    })();
-
-    function translateTo(lang) {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-      } else {
-        setTimeout(() => translateTo(lang), 500); // Tenta novamente se não carregou
-      }
-    }
-  </script>
   <!-- Cabeçalho -->
-  <header>
-    <h2>AX-LARA</h2>
-    <h1>Architect of Xperience</h1>
-    <p>Perfil Técnico Profissional - Lara E. Negreiros</p>
-  </header>
-
+<header>
+  <h2>A<span style="color: var(--primary);">X</span>LARA</h2>
+  <h1>Architect of Xperience</h1>
+  <p>Perfil Técnico Profissional - Lara E. Negreiros</p>
+</header>
   <!-- Container Principal -->
   <div class="container">
     <!-- Introdução -->
     <div class="intro">
       <p>
-        Aqui você encontra um resumo direto das stacks, ferramentas e habilidades que fui desenvolvendo ao longo da
-        minha jornada.
+        Olá! Sou Lara E. Negreiros, freelancer especializada em criar experiências imersivas através da modelagem 3D, tours virtuais 360° e, em breve, projetos em Realidade Virtual (VR) e Realidade Aumentada (AR).
       </p>
       <p>
-        Hoje atuo como freelancer em modelagem 3D otimizada, criação de tours virtuais 360°, integração em plataformas
-        web, além do desenvolvimento de projetos em Realidade Aumentada (AR) e Realidade Virtual (VR).
+        Atualmente desenvolvo projetos e entrego modelagem 3D otimizada com texturas e iluminação de qualidade para integração em diferentes plataformas.
       </p>
       <p>
-        Também utilizo ferramentas de Inteligência Artificial para acelerar fluxos de trabalho, mantendo uma postura de
-        constante aprendizado e adaptação a novas tecnologias.
+        Além das tecnologias e habilidades demonstradas, também utilizo Inteligência Artificial para otimizar processos e acelerar fluxos de trabalho. Acredito na integração contínua entre ferramentas e na facilidade que temos hoje de aprimorar e expandir nossos conhecimentos. Tenho facilidade de adaptação e aprendizado de novos softwares e tecnologias, mantendo sempre uma mente aberta para evolução e inovações no campo digital.
       </p>
+      <a href="portproj.html" class="btn-portfolio">
+        <i class="fas fa-images"></i> Ver Projetos
+      </a>
     </div>
-
+  
     <!-- Modelagem 3D -->
     <div class="section">
-      <h2>Softwares: Modelagem 3D e Produção Visual</h2>
+      <h2>Modelagem 3D</h2>
       <ul>
-        <li>SketchUp (modelagem)</li>
-        <li>Revit (BIM)</li>
-        <li>AutoCAD (desenho técnico)</li>
-        <li>Lumion e Twinmotion (renderização)</li>
-        <li><i>Otimização de modelos para exportação</i></li>
+        <li>SketchUp</li>
+        <li>Revit</li>
+        <li>AutoCAD</li>
+        <li>Lumion (render)</li>
+        <li>Twinmotion (render)</li>
+        <li>Otimização de texturas e modelagem para exportação</li>
       </ul>
     </div>
 
@@ -315,7 +315,7 @@
       <ul>
         <li>HTML, CSS</li>
         <li>JavaScript</li>
-        <li>Integrações Web (AR.js, Pannellum)</li>
+        <li>Integrações Web com AR.js e Pannellum</li>
       </ul>
     </div>
 
@@ -323,10 +323,9 @@
     <div class="section">
       <h2>Ferramentas de Colaboração</h2>
       <ul>
-        <li>Figma (prototipagem)</li>
-        <li>Photoshop, GIMP, Canva (edição de imagem)</li>
-        <li>Git, VS Code (desenvolvimento)</li>
-        <li>Qwen, DeepSeek, ChatGPT (IA para auxílio)</li>
+        <li>Figma (prototipagem e design colaborativo)</li>
+        <li>Git (controle de versões)</li>
+        <li>VS Code (desenvolvimento)</li>
       </ul>
     </div>
 
@@ -334,15 +333,14 @@
     <div class="section">
       <h2>Formação Acadêmica</h2>
       <ul>
-        <li>Pós-graduação em Projeto de Arquitetura: da concepção ao edifício – PUC PR (2018)</li>
+        <li>Especialização em Projeto de Arquitetura: da concepção ao edifício – PUC PR (2018)</li>
         <li>Bacharelado em Arquitetura e Urbanismo – UNP (2015)</li>
       </ul>
       <h2>Cursos Complementares</h2>
       <ul>
-        <li>Unreal Engine: Fundamentos para Projetos Imersivos - VR Academy</li>
         <li>Desenvolvedor Full-stack – SENAC</li>
-        <li>Neuroarquitetura: Princípios de Neurociência Aplicada - Neuroarq Academy</li>
-        <li>CAP Light Design: Iluminação Comercial e Corporativa - IPOG</li>
+        <li>CAP Light Design - Iluminação Comercial e Corporativa - IPOG</li>
+        <li>Neuroarquitetura - Princípios de Neurociência Aplicada - Neuroarq Academy</li>
         <li>Produto & Projeto de Mobiliário - Dalmobile fabric.</li>
       </ul>
     </div>
@@ -350,13 +348,19 @@
 
   <!-- Footer -->
   <footer>
+    
     <div class="social-icons">
       <a href="https://github.com/larangrs" target="_blank"><i class="fab fa-github"></i></a>
       <a href="https://www.linkedin.com/in/laranegreiros/" target="_blank"><i class="fab fa-linkedin"></i></a>
       <a href="https://wa.me/+5584996249406" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
     <a href="index.html" class="btn-voltar"></a>
+    <p>&copy; 2025 AX-LARA Studio | Todos os direitos reservados</p>
   </footer>
-</body>
 
+  <!-- Botão flutuante do WhatsApp -->
+  <a href="https://wa.me/+5584996249406" class="float-whatsapp" title="Fale pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</body>
 </html>

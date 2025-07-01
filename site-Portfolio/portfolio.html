@@ -93,6 +93,20 @@
       background: linear-gradient(135deg, var(--portfolio-accent-light), var(--portfolio-accent));
     }
 
+    /* Estilo alternativo para o botão */
+    .btn-portfolio.outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      box-shadow: none;
+      margin: 10px 0;
+    }
+
+    .btn-portfolio.outline:hover {
+      background: rgba(0, 240, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
     .btn-portfolio i {
       margin-right: 8px;
     }
@@ -235,7 +249,7 @@
   <div class="container">
     <!-- Introdução -->
     <div class="intro">
-      <!-- Botão para o Portfólio -->
+      <!-- Botão principal para o Portfólio -->
       <a href="portproj.html" class="btn-portfolio">
         <i class="fas fa-images"></i> Ver Portfólio Completo
       </a>
@@ -249,6 +263,13 @@
       <p>
         Além das tecnologias e habilidades demonstradas, também utilizo Inteligência Artificial para otimizar processos e acelerar fluxos de trabalho. Acredito na integração contínua entre ferramentas e na facilidade que temos hoje de aprimorar e expandir nossos conhecimentos. Tenho facilidade de adaptação e aprendizado de novos softwares e tecnologias, mantendo sempre uma mente aberta para evolução e inovações no campo digital.
       </p>
+
+      <!-- Botão secundário para projetos 3D -->
+      <div style="text-align: center;">
+        <a href="portproj.html" class="btn-portfolio outline">
+          <i class="fas fa-cube"></i> Ver Projetos em 3D
+        </a>
+      </div>
     </div>
 
     <!-- Modelagem 3D -->
