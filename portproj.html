@@ -139,57 +139,70 @@
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 30px;
     }
-    .project-card {
-      background-color: var(--dark-light);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-      border: 1px solid #333;
-      position: relative;
-    }
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 255, 247, 0.2);
-    }
-    .project-preview {
-      width: 100%;
-      height: 250px;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-preview iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .project-info {
-      padding: 20px;
-    }
-    .project-title {
-      color: var(--primary);
-      font-size: 1.4em;
-      margin-bottom: 10px;
-    }
-    .project-description {
-      color: var(--gray);
-      font-size: 0.95em;
-      margin-bottom: 15px;
-    }
-    .project-link {
-      display: inline-block;
-      background-color: var(--primary);
-      color: var(--dark);
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s;
-      font-size: 0.9em;
-    }
-    .project-link:hover {
-      background-color: var(--primary-dark);
-    }
+   
+  .project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-light);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid #333;
+}
+
+.project-preview {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.project-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.project-title {
+  color: var(--primary);
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.project-description {
+  color: var(--gray);
+  font-size: 0.95em;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.project-link {
+  align-self: flex-start;
+  display: inline-block;
+  background-color: var(--primary);
+  color: var(--dark);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 0.9em;
+}
+
+.project-link:hover {
+  background-color: var(--primary-dark);
+}
+
     /* Modal para visualização expandida */
     .modal {
       display: none;
@@ -349,6 +362,19 @@
           <a href="#" class="project-link expand-btn" data-src="tour-galeria.html">Ver Projeto Completo</a>
         </div>
       </div>
+
+       <div class="project-card">
+        <div class="project-preview">
+       <iframe src="https://tour.panoee.net/67894c07234c0474530f4778" loading="lazy" title="Quarto Praia"></iframe>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Quarto imersivo</h3>
+          <p class="project-description"></p>
+         <a href="#" class="project-link expand-btn" data-src="https://tour.panoee.net/67894c07234c0474530f4778">Ver Projeto Completo</a>
+        </div>
+      </div>
+    
+
       <!-- Projeto 2 -->
       <div class="project-card">
         <div class="project-preview">
@@ -382,20 +408,20 @@
           <a href="#" class="project-link expand-btn" data-src="tour-office.html">Ver Projeto Completo</a>
         </div>
       </div>
-    </div>
-       <!-- Projeto 5 -->
       <div class="project-card">
-        <div class="project-preview">
-          <iframe src="tour-av12.html" loading="lazy" title="Tour Escritório"></iframe>
-        </div>
-        <div class="project-info">
-          <h3 class="project-title">AV 12 Gallery</h3>
-          <p class="project-description"></p>
-          <a href="#" class="project-link expand-btn" data-src="tour-av12.html">Ver Projeto Completo</a>
-          </div>
-        </div>
-      </div>
+  <div class="project-preview">
+    <iframe src="tour-av12.html" loading="lazy" title="Tour Escritório"></iframe>
+  </div>
+  <div class="project-info">
+    <h3 class="project-title">AV 12 Gallery</h3>
+    <p class="project-description"></p>
+    <a href="#" class="project-link expand-btn" data-src="tour-av12.html">Ver Projeto Completo</a>
+  </div>
+</div>
+
     </div>
+ <!-- Projeto 5 -->
+
   </main>
   <!-- Modal para visualização expandida -->
   <div class="modal" id="projectModal">
