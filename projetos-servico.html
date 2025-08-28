@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Criação de tours virtuais 360°, modelagens 3D e páginas interativas para arquitetos, designers e artistas">
+  <meta name="keywords" content="tour virtual, 360, modelagem 3D, realidade virtual, arquitetura digital">
+  <title>AX-LARA Studio | Experiências Imersivas em 360°</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css ">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Photo Sphere Viewer CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.css">
+  <style>
+    :root {
+      --primary: #00fff7;
+      --primary-dark: #00cccc;
+      --secondary: #25d366;
+      --dark: #0d0d0d;
+      --dark-light: #1a1a1a;
+      --light: #f0f0f0;
+      --gray: #ccc;
+    
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    header {
+      background-color: rgba(26, 26, 26, 0.185);
+      color: var(--light);
+      text-align: center;
+      padding: 25px 0;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(0, 255, 247, 0.1);
+    }
+    .logo {
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: var(--light);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .logo i {
+      font-style: normal;
+      color: var(--primary);
+      display: inline-block;
+      transform: translateZ(0);
+      text-shadow: 
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px rgba(0, 255, 247, 0.5);
+      animation: pulse 2s infinite alternate;
+    }
+    @keyframes pulse {
+      0% {
+        text-shadow: 
+          0 0 5px var(--primary),
+          0 0 10px var(--primary),
+          0 0 20px var(--primary),
+          0 0 40px rgba(0, 255, 247, 0.5);
+      }
+      100% {
+        text-shadow: 
+          0 0 10px var(--primary),
+          0 0 20px var(--primary),
+          0 0 30px var(--primary),
+          0 0 50px rgba(0, 255, 247, 0.8);
+      }
+    }
+    .logo::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      transform: scaleX(0);
+      transition: transform 0.6s ease;
+    }
+    .logo:hover::after {
+      transform: scaleX(1);
+    }
+    .logo-subtitle {
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+      font-size: 0.8em;
+      letter-spacing: 1px;
+      font-weight: 400;
+      color: var(--primary-dark);
+      margin-left: 4px;
+    }
+    header h1 {
+      font-size: 1.2rem;
+      color: var(--light);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 5px;
+      font-style: italic;
+    }
+    /* Botão Hamburguer */
+    .menu-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--light);
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle:hover {
+      color: var(--primary);
+    }
+    /* Dropdown Menu */
+    .dropdown-menu {
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      background-color: rgba(26, 26, 26, 0.95);
+      min-width: 180px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px 0;
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+      border: 1px solid rgba(0, 255, 247, 0.2);
+    }
+    .dropdown-menu a {
+      color: var(--light);
+      padding: 12px 25px;
+      transition: all 0.2s ease;
+      position: relative;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .dropdown-menu a:hover {
+      color: var(--primary);
+      background: transparent;
+    }
+    .dropdown-menu a.portfolio-link {
+      color: var(--portfolio-accent);
+      font-weight: 600;
+    }
+    .dropdown-menu a.portfolio-link:hover {
+      color: #3dffff;
+    }
+    .dropdown-menu a:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25px;
+      width: calc(100% - 50px);
+      height: 1px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .dropdown-menu a.portfolio-link:after {
+      background: var(--portfolio-accent);
+    }
+    .dropdown-menu a:hover:after {
+      transform: scaleX(1);
+    }
+    /* Hero Section */
+  /* ===== NOVOS ESTILOS PARA O 360° ===== */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
+  margin-top: -100px;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.panorama-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 100%;
+  background-image: url('imagens/001.jpg');
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: center center;
+  animation: rotatePanorama 60s linear infinite;
+  z-index: 1;
+}
+
+@keyframes rotatePanorama {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-66.666%); }
+}
+
+.panorama-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 75% 30%, rgba(0,255,247,0.15) 0%, transparent 50%);
+  z-index: 2;
+}
+
+
+  .hero {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  text-align: center;
+}
+
+    .hero h2 {
+      color: var(--primary);
+      font-size: 2.5em;
+      margin-bottom: 25px;
+      line-height: 1.3;
+      font-weight: 600;
+      background: linear-gradient(90deg, var(--primary), #00ff9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 10px rgba(0, 255, 247, 0.3), 
+                   0 0 20px rgba(0, 255, 200, 0.2);
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes neonGlow {
+      from { text-shadow: 0 0 5px rgba(0, 255, 247, 0.3); }
+      to { text-shadow: 0 0 15px rgba(0, 255, 247, 0.7), 
+                        0 0 25px rgba(0, 200, 255, 0.4); }
+    }
+    .hero p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 1000px;
+      margin: 0 auto 35px;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 255, 247, 0.3);
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 255, 247, 0.4);
+      background-color: var(--primary-dark);
+    }
+    .portfolio-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      background: linear-gradient(135deg, #6f45e230, #88d3ce);
+      color: white;
+      box-shadow: 0 4px 15px rgba(111, 69, 226, 0.218);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .portfolio-button i {
+      margin-right: 8px;
+      font-size: 1.1em;
+    }
+    .portfolio-button:hover {
+      background: linear-gradient(135deg, #88d3ce, #6e45e2);
+      box-shadow: 0 6px 20px rgba(110, 69, 226, 0.6);
+      transform: translateY(-3px);
+    }
+    /* Pacotes Section */
+    .packages {
+      padding: 80px 20px;
+      background-color: #111;
+    }
+    .section-title {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2em;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      margin: 15px auto;
+    }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-items: center;
+    }
+    .package-card {
+      background-color: var(--dark-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      min-height: 500px;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 350px;
+    }
+    .package-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 255, 247, 0.15);
+    }
+    .package-badge {
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 6px 15px;
+      font-weight: 600;
+      border-radius: 0;
+      font-size: 0.8em;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+    .package-content {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .package-title {
+      color: var(--light);
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .package-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary);
+    }
+    .package-description {
+      color: var(--gray);
+      font-size: 0.95em;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .package-features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+    .package-features li {
+      padding: 8px 0;
+      color: var(--gray);
+      position: relative;
+      padding-left: 25px;
+      font-size: 0.9em;
+    }
+    .package-features li::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+    }
+    .preview-image {
+      margin: 15px 0;
+      position: relative;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .package-actions {
+      margin-top: 20px;
+      text-align: center;
+      opacity: 1;
+      visibility: visible;
+    }
+    .package-actions .btn {
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    .preview-image i {
+      font-size: 4rem;
+      color: var(--primary);
+      animation: float 6s ease-in-out infinite;
+      text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotateY(0);
+        text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+      }
+      25% {
+        transform: translateY(-10px) rotateY(10deg);
+        text-shadow: 0 0 15px rgba(0, 255, 247, 0.7);
+      }
+      50% {
+        transform: translateY(0) rotateY(0);
+        text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+      }
+      75% {
+        transform: translateY(-10px) rotateY(-10deg);
+        text-shadow: 0 0 15px rgba(0, 255, 247, 0.7);
+      }
+    }
+    /* Pacote 1 - Ícone 3D */
+    .package-card:nth-child(1) .preview-image i {
+      animation: float 6s ease-in-out infinite, rotate3d 8s linear infinite;
+    }
+    @keyframes rotate3d {
+      0% { transform: rotateY(0); }
+      100% { transform: rotateY(360deg); }
+    }
+    /* Pacote 2 - Ícone pulsante */
+    .package-card:nth-child(2) .preview-image i {
+      animation: pulse-icon 3s ease infinite alternate;
+    }
+    @keyframes pulse-icon {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.1);
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(0, 255, 247, 0.8);
+      }
+    }
+    /* Pacote 3 - Ícone flutuante */
+    .package-card:nth-child(3) .preview-image i {
+      animation: float-fast 4s ease-in-out infinite;
+    }
+    @keyframes float-fast {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    /* Formulário de Contato */
+    .contact-form {
+      background-color: #000;
+      padding: 80px 20px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: var(--dark-light);
+      color: var(--light);
+      font-size: 1em;
+      transition: border 0.3s;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    textarea.form-control {
+      min-height: 150px;
+    }
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1em;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--dark);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 247, 0.3);
+    }
+    .btn-whatsapp {
+      background-color: var(--secondary);
+      color: white;
+    }
+    .btn-whatsapp:hover {
+      background-color: #1ebe5b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    .btn-voltar {
+      background-color: #1a1a1a8c;
+      border: 1px solid #00fff7;
+      color: #00fff7;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+      margin-left: 30px;
+      margin-top: -70px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .btn-voltar::before {
+      content: "←";
+      font-size: 1.2em;
+      display: inline-block;
+    }
+    .btn-voltar:hover {
+      background-color: #00fff7;
+      color: #000;
+    }
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: var(--gray);
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(0, 255, 247, 0.1);
+    }
+    .social-links {
+      margin: 20px 0;
+    }
+    .social-links a {
+      color: var(--gray);
+      margin: 0 12px;
+      font-size: 1.3em;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    /* Botão flutuante do WhatsApp */
+    .float-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--secondary);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .float-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+    /* Responsividade */
+    @media (max-width: 767px) {
+      /* Header mobile */
+      header {
+        padding: 15px 0;
+      }
+      .logo {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+      }
+      .preview-image i {
+        font-size: 3rem;
+      }
+      header h1 {
+        font-size: 0.9rem;
+      }
+      header p {
+        font-size: 0.7rem;
+      }
+      .menu-toggle {
+        right: 15px;
+        top: 15px;
+        font-size: 1.3rem;
+      }
+      .dropdown-menu {
+        right: 15px;
+        top: 55px;
+        min-width: 160px;
+      }
+      /* Hero section mobile */
+      .hero-wrapper {
+        height: calc(100vh - 70px);
+        margin-top: 5px;
+      }
+      .hero {
+        padding: 30px 15px;
+      }
+      .hero h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+      }
+      .hero p {
+        font-size: 0.95em;
+        margin-bottom: 25px;
+      }
+      .cta-button {
+        padding: 10px 25px;
+        font-size: 0.9em;
+      }
+      /* Pacotes mobile */
+      .packages {
+        padding: 40px 15px;
+      }
+      .section-title {
+        font-size: 1.6em;
+        margin-bottom: 30px;
+      }
+      .section-title:after {
+        width: 60px;
+        height: 2px;
+        margin: 10px auto;
+      }
+      .package-card {
+        margin-bottom: 25px;
+      }
+      .preview-image {
+        height: 150px;
+      }
+      .preview-image i {
+        font-size: 2.5rem;
+      }
+      /* Formulário mobile */
+      .contact-form {
+        padding: 40px 15px;
+      }
+      .form-control {
+        padding: 12px;
+      }
+      /* Footer mobile */
+      footer {
+        padding: 20px 15px;
+      }
+      /* Botões flutuantes mobile */
+      .float-whatsapp {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        bottom: 20px;
+        right: 20px;
+      }
+      .btn-voltar {
+        width: 40px;
+        height: 40px;
+        margin-top: -50px;
+        margin-left: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">A<i>X</i>LARA<span class="logo-subtitle"> studio digital</span></div>
+      <h1>Tours 360° | Sites Interativos | Modelagem 3D</h1>
+      <p>Freelancer | Arquitetura Digital</p>
+      <!-- Botão Hamburguer sempre visível -->
+      <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- Dropdown Menu -->
+      <nav id="dropdown-menu" class="dropdown-menu">
+        <a href="#pacotes">Pacotes</a>
+        <a href="portproj.html" class="portfolio-link">Portfólio</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+<div class="hero-wrapper">
+  <div class="panorama-container"></div>
+  <div class="panorama-overlay"></div>
+  <section class="hero">
+    <h2>Impulsione seus projetos com inovação digital</h2>
+    <p>Transformo suas ideias em experiências imersivas com tours virtuais, páginas interativas e modelos 3D. Ideal para profissionais que desejam apresentar seus projetos de forma estratégica e fortalecer sua presença no mundo digital.</p>
+    <div class="cta-buttons">
+      <a href="#pacotes" class="cta-button">Conheça nossos Pacotes</a>
+      <a href="portproj.html" class="portfolio-button">Ver Portfólio</a>
+    </div>
+  </section>
+</div>
+  <section id="pacotes" class="packages">
+    <h2 class="section-title">Nossos Pacotes</h2>
+    <div class="packages-grid">
+      <!-- Pacote 1 -->
+      <div class="package-card">
+        <div class="package-badge">Mais Completo</div>
+        <div class="package-content">
+          <h3 class="package-title">1. Imersão Pro</h3>
+          <p class="package-description">
+            Pacote completo com tour 360°, site personalizado e otimização da modelagem 3D com render incluso. Ideal para quem quer presença digital imersiva e profissional.
+          </p>
+          <ul class="package-features">
+            <li>Otimização da modelagem 3D (com render)</li>
+            <li>Tour virtual 360° interativo</li>
+            <li>Site completo personalizado com hospedagem por 1 ano</li>
+          </ul>
+          <div class="preview-image">
+            <i class="fas fa-cube"></i>
+          </div>
+          <div class="package-actions">
+            <a href=" https://galeriajardins.com.br/ " target="_blank" class="btn btn-primary">Ver Modelo</a>
+          </div>
+        </div>
+      </div>
+      <!-- Pacote 2 -->
+      <div class="package-card">
+        <div class="package-content">
+          <h3 class="package-title">2. Presença Digital</h3>
+          <p class="package-description">Apresente seu negócio com uma landing page responsiva, integrada ao seu tour virtual e com base em sua identidade visual já existente.</p>
+          <ul class="package-features">
+            <li>Tour virtual incorporado (imagens fornecidas por você)</li>
+            <li>Layout responsivo baseado na sua marca e identidade</li>
+            <li>Publicação de uma página única com seus conteúdos</li>
+          </ul>
+          <div class="preview-image">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <div class="package-actions">
+            <a href="landinhpage.html" target="_blank" class="btn btn-primary">Ver Modelo</a>
+          </div>
+        </div>
+      </div>
+      <!-- Pacote 3 -->
+      <div class="package-card">
+        <div class="package-content">
+          <h3 class="package-title">3. Tour Essencial</h3>
+          <p class="package-description">
+            Tour virtual 360° funcional e acessível com duas opções: você envia as imagens ou entregamos o tour renderizado a partir da sua modelagem. Ideal para apresentações rápidas e eficazes.
+          </p>
+          <ul class="package-features">
+            <li>Montagem do tour virtual 360° personalizado</li>
+            <li>Link compartilhável pronto para divulgar</li>
+            <li>Personalização básica</li>
+          </ul>
+          <div class="preview-image">
+            <i class="fas fa-vr-cardboard"></i>
+          </div>
+          <div class="package-actions">
+            <a href="https://tour.panoee.net/67894c07234c0474530f4778 " target="_blank" class="btn btn-primary">Ver Modelo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Formulário de Contato -->
+  <section id="contato" class="contact-form">
+    <h2 class="section-title">Solicite um Orçamento</h2>
+    <form class="form-grid" action="https://formsubmit.co/studio.axlara @gmail.com" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Seu nome completo" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" class="form-control" placeholder="Seu melhor e-mail" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" name="whatsapp" class="form-control" placeholder="WhatsApp (opcional)">
+      </div>
+      <div class="form-group">
+        <select name="pacote" class="form-control" required>
+          <option value="">Selecione um pacote</option>
+          <option value="imersao">1. Imersão Pro</option>
+          <option value="presenca">2. Presença Digital</option>
+          <option value="essencial">3. Tour Essencial</option>
+          <option value="personalizado">Projeto Personalizado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <textarea name="mensagem" class="form-control" placeholder="Descreva seu projeto, dimensões e necessidades especiais"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="file" name="arquivo" id="project-files" class="form-control">
+        <label for="project-files" style="color: var(--gray); font-size: 0.9em;">Anexe referências (opcional)</label>
+      </div>
+      <!-- Campos ocultos -->
+      <input type="hidden" name="_next" value="https://axlara.com/index.html ">
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+      </div>
+    </form>
+  </section>
+  <a href="index.html" class="btn-voltar"></a>
+  <!-- Botão flutuante do WhatsApp -->
+  <a href="https://wa.me/5584996249406 " class="float-whatsapp" title="Fale pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 A<i>X</i>LARA Studio | Todos os direitos reservados</p>
+  </footer>
+  
+  <!-- Photo Sphere Viewer JS -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uevent@2.0.0/uevent.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.js"></script>
+  
+  <!-- Script para abrir/fechar o dropdown -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    menuToggle.addEventListener('click', () => {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
+    // Fecha o menu se o usuário clicar fora dele
+    document.addEventListener('click', (e) => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownMenu.style.display = 'none';
+      }
+    });
+    
+    // Inicializa o Photo Sphere Viewer
+    document.addEventListener('DOMContentLoaded', function() {
+      const viewer = new PhotoSphereViewer.Viewer({
+        container: document.querySelector('#viewer-container'),
+        panorama: '/imagens/roof_garden.jpg',
+        loadingImg: 'https://photo-sphere-viewer.js.org/assets/photosphere-logo.gif',
+        loadingTxt: 'Carregando...',
+        defaultLat: 0,
+        defaultLong: Math.PI/3,
+        defaultZoomLvl: 50,
+        navbar: false,
+        mousewheel: false,
+        mousemove: false,
+        touchmoveTwoFingers: false,
+        autorotateDelay: 1000,
+        autorotateSpeed: '1rpm',
+        autorotateLat: 0.3,
+        moveSpeed: 0,
+        zoomSpeed: 0,
+        time_anim: false
+      });
+      
+      // Inicia a rotação automática após o carregamento
+      viewer.on('ready', () => {
+        viewer.startAutorotate();
+      });
+    });
+  </script>
+</body>
+</html>
