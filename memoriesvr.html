@@ -9,11 +9,11 @@
         
         :root {
             --primary: #0a0a0f;
-            --secondary: #7e22ce;
-            --accent: #3b82f6;
-            --neon-blue: #00e5ff;
-            --neon-purple: #c026d3;
-            --text: #e6e6e6;
+            --secondary: #3c2297;
+            --accent: #4e3bf6;
+            --neon-blue: #00fff7;
+            --neon-purple: #441799;
+            --text: #f5f5f5d0;
             --text-secondary: #a0a0a0;
             --card-bg: rgba(30, 20, 40, 0.8);
             --section-bg: rgba(20, 15, 30, 0.7);
@@ -37,7 +37,9 @@
             min-height: 100vh;
             line-height: 1.6;
             background-image: 
-                linear-gradient(to bottom, #0a0a0f, #0a0815, #0b061b);
+                linear-gradient(to bottom, #050505, #050505, #050505);
+            display: flex;
+            flex-direction: column;
         }
         
         /* Efeito de partículas simplificado */
@@ -63,6 +65,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            flex: 1 0 auto; /* Permite que o container cresça para preencher o espaço */
         }
         
         header {
@@ -128,12 +131,17 @@
             right: -80px;
             width: 400px;
             height: 400px;
-            opacity: 0.07;
+            opacity: 0.3;
             z-index: 1;
             animation: float 10s ease-in-out infinite;
             pointer-events: none;
-            border-radius: 20px;
-            filter: blur(1px);
+            border-radius: 50px;
+            filter: blur(0.1px);
+             border: 1px solid rgba(0, 255, 247, 0.5);
+            box-shadow: 
+                0 0 15px rgb(0, 255, 247),
+                0 0 30px rgba(0, 255, 247, 0.637),
+                inset 0 0 20px rgba(0, 255, 247, 0.2);
         }
         
         @keyframes float {
@@ -151,6 +159,21 @@
             background: var(--section-bg);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* Efeito neon azul na borda */
+            border: 1px solid rgba(0, 255, 247, 0.2);
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .artist-section:hover {
+            box-shadow: 
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1);
+            border: 1px solid rgba(0, 255, 247, 0.3);
         }
         
         .artist-title {
@@ -255,8 +278,13 @@
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             transition: all 0.4s ease;
-            border: 1px solid rgba(123, 97, 255, 0.15);
+            border: 1px solid rgba(0, 255, 247, 0.2);
             position: relative;
+            /* Efeito neon azul na borda */
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05);
         }
         
         .project-card::before {
@@ -271,8 +299,12 @@
         
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(123, 97, 255, 0.2);
-            border-color: rgba(123, 97, 255, 0.4);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1);
+            border: 1px solid rgba(0, 255, 247, 0.4);
         }
         
         .project-image {
@@ -376,9 +408,23 @@
             padding: 50px;
             border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(123, 97, 255, 0.2);
-            position: relative;
-            z-index: 2;
+            /* Efeito neon azul na borda */
+            border: 1px solid rgba(0, 255, 247, 0.2);
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05),
+                0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .project-detail:hover {
+            box-shadow: 
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1),
+                0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 247, 0.3);
         }
         
         .video-container {
@@ -465,36 +511,40 @@
         .pt { display: block; }
         .en { display: none; }
         
-        footer {
-            background: rgba(10, 10, 15, 0.9);
-            color: var(--text);
-            padding: 60px 0;
-            margin-top: 100px;
-            text-align: center;
-            border-top: 1px solid rgba(123, 97, 255, 0.2);
-            position: relative;
-            z-index: 2;
-        }
-        
-        footer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-content p {
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-        }
+       footer {
+        background: rgba(10, 10, 15, 0.9);
+        color: var(--text);
+        padding: 60px 0;
+        text-align: center;
+        border-top: 1px solid rgba(123, 97, 255, 0.2);
+        position: relative;
+        z-index: 2;
+        width: 100%; /* Garante que ocupe 100% da largura */
+        margin-top: 100px;
+        left: 0;
+        right: 0;
+    }
+    
+    footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+    }
+    
+    .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px; /* Adiciona padding para não colar nas bordas em mobile */
+    }
+    
+    .footer-content p {
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+    }
         
         .contact-link {
             color: var(--neon-blue);
@@ -676,7 +726,7 @@
             </div>
             
             <div class="manifesto-text pt">
-                <p>No começo, pode parecer apenas um presente único, uma recordação imersiva para guardar momentos preciosos. Um presente que toca o coração e faz reviver emoções, como um abraço que se pode sentir mesmo à distância.</p>
+                <p>No começo, pode parecer apenas um presente único, uma recordação imersiva para guardar momentos preciosos. Um presente que toca o coração emoções, como um abraço que se pode sentir mesmo à distância.</p>
                 
                 <p>Mas, para quem se permite olhar além, Memories Live é muito mais: é uma jornada sutil e profunda pelo seu passado, pelas lembranças que moldaram quem você é hoje.</p>
                 
@@ -713,7 +763,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <footer>
         <div class="footer-content">
             <p>Interessado em colaborar ou saber mais sobre meus projetos?</p>
