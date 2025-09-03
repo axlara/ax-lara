@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR EXPERIENCE | AXLARA STUDIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #00fff7;
+            --primary-dark: #00c9c3;
+            --secondary: #6c42f5;
+            --dark: #0a0a0f;
+            --dark-light: #1a1a2e;
+            --light: #f5f5f5;
+            --light-gray: #cccccc;
+            --card-bg: rgba(23, 22, 27, 0.8);
+            --section-bg: rgba(17, 15, 15, 0.475);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            line-height: 1.6;
+            /* AQUI ESTÁ A IMAGEM DE FUNDO - SUBSTITUA PELO SEU CAMINHO CORRETO */
+            background: 
+                linear-gradient(rgba(5, 5, 5, 0.663), rgba(5, 5, 5, 0.85)),
+                url('/ax-lara-main/imagens/bgstars2.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* Efeito de partículas */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 20% 30%, rgba(123, 97, 255, 0.15), transparent 50%),
+                radial-gradient(1.5px 1.5px at 80% 70%, rgba(192, 38, 211, 0.15), transparent 50%),
+                radial-gradient(1px 1px at 40% 85%, rgba(59, 130, 246, 0.1), transparent 50%),
+                radial-gradient(1px 1px at 60% 15%, rgba(0, 229, 255, 0.1), transparent 50%);
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1 0 auto;
+        }
+        
+        /* Header simplificado */
+        header {
+            padding: 60px 0 30px;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .logo {
+            font-family:  'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-style: normal;
+            color: var(--primary);
+            display: inline-block;
+            transform: translateZ(0);
+            text-shadow: 
+                0 0 5px var(--primary),
+                0 0 10px var(--primary),
+                0 0 20px var(--primary),
+                0 0 40px rgba(0, 255, 247, 0.5);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .logo-subtitle {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.5rem;
+            letter-spacing: 6px;
+            font-weight: 400;
+            color: var(--light-gray);
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+        
+        @keyframes pulse {
+            from {
+                text-shadow: 
+                    0 0 5px var(--primary),
+                    0 0 10px var(--primary),
+                    0 0 20px var(--primary),
+                    0 0 40px rgba(0, 255, 247, 0.5);
+            }
+            to {
+                text-shadow: 
+                    0 0 8px var(--primary),
+                    0 0 15px var(--primary),
+                    0 0 25px var(--primary),
+                    0 0 50px rgba(0, 255, 247, 0.8);
+            }
+        }
+        
+        .byline {
+            font-size: 1rem;
+            color: var(--light-gray);
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+        
+        /* Seção de introdução */
+        .intro-section {
+            width: 100%;
+            margin: 30px 0 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(123, 97, 255, 0.15);
+        }
+        
+        .vr-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--light);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        
+        .vr-logo .neon-x {
+            color: var(--primary);
+            display: inline-block;
+            text-shadow: 
+                0 0 5px var(--primary),
+                0 0 10px var(--primary),
+                0 0 20px var(--primary);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        .intro-subtitle {
+            font-size: 1.6rem;
+            color: var(--light);
+            margin-bottom: 30px;
+            font-weight: 400;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 0 20px;
+            letter-spacing: 1px;
+        }
+        
+        .intro-description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.8;
+            padding: 0 30px;
+            color: var(--light-gray);
+        }
+        
+        .intro-description p {
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            margin: 50px auto;
+            opacity: 0.5;
+        }
+        
+        /* Seção de projetos */
+        .projects-section {
+            margin: 60px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            margin: 15px auto 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(123, 97, 255, 0.15);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(123, 97, 255, 0.2);
+            border: 1px solid rgba(123, 97, 255, 0.3);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+        .project-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .project-card:hover .project-image::after {
+            transform: scaleX(1);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .project-description {
+            font-size: 0.95rem;
+            color: var(--light-gray);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .tech-tag {
+            background: rgba(123, 97, 255, 0.12);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(123, 97, 255, 0.2);
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-released {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .status-development {
+            background: rgba(255, 165, 0, 0.12);
+            color: #ffa500;
+            border: 1px solid rgba(255, 165, 0, 0.2);
+        }
+        
+        /* Detalhes do projeto */
+        .project-detail {
+            margin: 80px auto;
+            max-width: 850px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(123, 97, 255, 0.2);
+        }
+        
+        .video-container {
+            width: 100%;
+            margin: 30px auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            padding-top: 56.25%;
+            border: 1px solid rgba(123, 97, 255, 0.2);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .manifesto-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            color: var(--light-gray);
+        }
+        
+        .manifesto-text p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .language-toggle {
+            margin: 2.5rem 0 1.5rem;
+            text-align: center;
+        }
+        
+        .language-toggle button {
+            background: none;
+            border: none;
+            color: var(--light-gray);
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin: 0 1rem;
+            padding: 0.4rem 0;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .language-toggle button:hover,
+        .language-toggle button.active {
+            color: var(--light);
+        }
+        
+        .language-toggle button.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .pt { display: block; }
+        .en { display: none; }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 15, 0.9);
+            color: var(--light);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid rgba(123, 97, 255, 0.15);
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: 80px;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-content p {
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+        
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .contact-link::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--light);
+        }
+        
+        .contact-link:hover::after {
+            width: 100%;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light-gray);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 40px 0 20px;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .vr-logo {
+                font-size: 1.5rem;
+            }
+            
+            .intro-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .intro-section {
+                padding: 30px 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .project-detail {
+                padding: 25px 20px;
+                margin: 60px auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.45rem;
+                letter-spacing: 4px;
+            }
+            
+            .byline {
+                font-size: 0.9rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .intro-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .intro-description {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+            
+            .project-detail {
+                padding: 20px 15px;
+            }
+            
+            .footer-content {
+                padding: 0 15px;
+            }
+        }
+/* Estilo para o óculos VR flutuante - SEM QUADRO, COM FLUTUAÇÃO SUAVE */
+.vr-glasses-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: -1;
+    width: 350px;
+    height: 350px;
+    transform: scale(1.2);
+    animation: float 6s ease-in-out infinite; /* Animação de flutuação */
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4)); /* Brilho neon ciano */
+    pointer-events: none; /* Não atrapalha cliques */
+}
+
+.vr-glasses {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.60; /* Leve transparência para efeito holográfico */
+    transition: all 0.3s ease;
+}
+
+.vr-glasses:hover {
+    opacity: 1;
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8))
+               drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
+}
+
+/* Animação de flutuação suave */
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1.2);
+        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+    }
+    50% {
+        transform: translateY(-15px) scale(1.25); /* Sobe um pouco */
+        filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+    }
+    100% {
+        transform: translateY(0) scale(1.2);
+        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">A<i>X</i>LARA<span class="logo-subtitle">aivrse studio </span></div>
+            <p class="subtitle">Portfólio VR & Experiências Imersivas</p>
+        </header>
+
+        <!-- Seção de Introdução -->
+        <section class="intro-section">
+            <a href="#" class="vr-logo">VR E<span class="neon-x">X</span>PERIENCES</a>
+            <h2 class="intro-subtitle">EXPERIÊNCIAS AUTORAIS EM REALIDADE VIRTUAL</h2>
+            
+            <div class="intro-description">
+                <p>Meu trabalho une <span class="highlight">expressão criativa</span>, <span class="highlight">storytelling imersivo</span> e <span class="highlight">tecnologia</span> para dar vida a histórias de pessoas, cidades e espaços — criando mundos virtuais que despertam emoção, reflexão e conexão.</p>
+                
+                <p>Através da realidade virtual, desenvolvo experiências que capturam a essência de momentos efêmeros, transformando memórias pessoais e patrimônios culturais em jornadas que permanecem no imaginário.</p>
+                
+                <p>Cada projeto é uma ponte entre o real e o virtual — entre o que já vivemos e o que ainda podemos imaginar — uma exploração envolvente que convida ao reencontro com nossas próprias histórias.</p>
+            </div>
+        </section>
+
+       
+
+        <!-- Seção Projetos Lançados -->
+        <section class="projects-section">
+            <h2 class="section-title">PROJETOS LANÇADOS</h2>
+            
+            <div class="projects-grid">
+                <!-- Projeto Memories Live -->
+                <article class="project-card">
+                    <div class="project-image">
+                       <img src="/ax-lara-main/imagens/vr_memorieslive.png "alt="Memories Live" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">VR Memories Live</h3>
+                        <p class="project-description">Imersão poética para reviver memórias especiais de forma personalizada, combinando tecnologia VR com narrativas emocionais.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">A-frame</span>
+                            <span class="tech-tag">WebVR</span>
+                            <span class="tech-tag">360 Video</span>
+                        </div>
+                        <span class="project-status status-released">Lançado</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+<!-- Seção Projetos em Desenvolvimento -->
+<section class="projects-section">
+    <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
+    <div class="projects-grid">
+        <!-- Projeto Histórico em Realidade Virtual -->
+        <article class="project-card">
+            <div class="project-image">
+                <img src="/ax-lara-main/imagens/vr_citytime.png" alt="Viagem no Tempo VR" loading="lazy">
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Viagem no Tempo VR</h3>
+                <p class="project-description">
+                    Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo, revivendo a história de lugares reais.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">A-Frame</span>
+                    <span class="tech-tag">WebVR</span>
+                    <span class="tech-tag">História Urbana</span>
+                </div>
+                <span class="project-status status-development">Em desenvolvimento</span>
+            </div>
+        </article>
+
+                <!-- Projeto de Interiores em VR -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="/ax-lara-main/imagens/VR_img.png "alt="Memories Live" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Interiores Imersivos VR</h3>
+                        <p class="project-description">
+                            Visualização de projetos arquitetônicos residenciais em realidade virtual a partir de modelos 3D do SketchUp.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">SketchUp</span>
+                            <span class="tech-tag">Meta Quest</span>
+                            <span class="tech-tag">Arquitetura</span>
+                        </div>
+                        <span class="project-status status-development">Em desenvolvimento</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+  
+        <!-- Detalhamento do Memories Live -->
+        <section class="project-detail">
+            <h2 class="section-title">VR MEMORIES LIVE</h2>
+            
+            <div class="language-toggle">
+                <button class="active" onclick="toggleLanguage('pt')">Português</button>
+                <button onclick="toggleLanguage('en')">English</button>
+            </div>
+            
+            <div class="manifesto-text pt">
+                <p>No começo, pode parecer apenas um presente único, uma recordação imersiva para guardar momentos preciosos. Um presente que toca o coração emoções, como um abraço que se pode sentir mesmo à distância.</p>
+                
+                <p>Mais do que uma experiência tecnológica, Memories Live é uma jornada sensível pelo seu passado, pelas lembranças que moldaram quem você é hoje.</p>
+                
+                <p>É um convite para reativar memórias esquecidas, para se reconectar com sua essência, com os sonhos e sentimentos que você talvez tenha deixado pelo caminho.</p>
+                
+                <p>Não é apenas reviver momentos — é reencontrar a si mesmo, é um despertar delicado que pode abrir portas para autoconhecimento, cura e transformação.</p>
+                
+                <p>Memories Live é feito para ser descoberto no tempo certo, para quem quiser e puder ir além do presente e tocar o que realmente importa.</p>
+                
+                <p>É um presente que cresce com você, um presente para a alma.</p>
+            </div>
+            
+            <div class="manifesto-text en">
+                <p>At first, it may seem like just a unique gift — an immersive keepsake to hold precious moments close. A gift that touches the heart and lets you relive emotions, like a warm embrace you can feel even from afar.</p>
+                
+                <p>More than a technological experience, Memories Live is a sensitive journey into your past, into the memories that shaped who you are today.</p>
+                
+                <p>It's an invitation to reactivate forgotten memories, to reconnect with your essence, with dreams and feelings you may have left behind.</p>
+                
+                <p>It's not just about reliving moments — it's about rediscovering yourself, a gentle awakening that can open doors to self-awareness, healing, and transformation.</p>
+                
+                <p>Memories Live is designed to be discovered in its own time, for those willing and able to go beyond the present and touch what truly matters.</p>
+                
+                <p>It's a gift that grows with you, a gift for the soul.</p>
+            </div>
+            
+            <!-- Espaço para o vídeo do projeto -->
+            <div class="video-container">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000;">
+                    <i class="fas fa-play-circle" style="font-size: 5rem; color: #6c42f5; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Interessado em colaborar ou saber mais sobre meus projetos?</p>
+            <p>Entre em contato: <a href="mailto:contato@axlara.com" class="contact-link">contato@axlara.com</a></p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleLanguage(lang) {
+            if (lang === 'pt') {
+                document.querySelector('.pt').style.display = 'block';
+                document.querySelector('.en').style.display = 'none';
+                document.querySelectorAll('.language-toggle button')[0].classList.add('active');
+                document.querySelectorAll('.language-toggle button')[1].classList.remove('active');
+            } else {
+                document.querySelector('.pt').style.display = 'none';
+                document.querySelector('.en').style.display = 'block';
+                document.querySelectorAll('.language-toggle button')[0].classList.remove('active');
+                document.querySelectorAll('.language-toggle button')[1].classList.add('active');
+            }
+        }
+    </script>
+<!-- Óculos VR Gigante Flutuante com Efeito Neon -->
+<div class="vr-glasses-container">
+    <img src="/ax-lara-main/imagens/Apple-Vision-Pro-VR-headset-AR-transparent-PNG-image.png" alt="Óculos VR Meta Quest" class="vr-glasses">
+</div>
+</body>
+</html>

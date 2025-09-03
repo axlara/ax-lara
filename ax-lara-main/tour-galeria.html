@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Virtual - Galeria Jardins</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css" />
+    <style>
+        /* Seu CSS original permanece inalterado */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #4b5b58;
+            font-family: 'Arial', sans-serif;
+        }
+        #panorama {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .nav-hotspot {
+            height: 58px;
+            width: 58px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #f8f8f859, #a7a7a7);
+            border: 2px solid #6cf0fa59;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px rgba(185, 255, 255, 0.6), 0 0 12px rgba(0, 255, 255, 0.4), inset 0 0 6px rgba(77, 77, 77, 0.973);
+            transform-style: preserve-3d;
+        }
+
+        .nav-hotspot:hover {
+            transform: scale(1.15) rotateX(8deg);
+            background: radial-gradient(circle at 30% 30%, #ecf1f1, #002e35);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+
+        .nav-hotspot .icon {
+            width: 28px;
+            height: 28px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300f0ff"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-bottom: 4px;
+            filter: drop-shadow(0 0 2px #303030);
+        }
+
+        .nav-hotspot .label {
+            color: #5a5959;
+            font-size: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-shadow: 0 0 4px rgb(110, 247, 240);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .info-hotspot {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background: rgba(61, 61, 61, 0.9);
+            border: 2px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .info-hotspot:hover {
+            transform: scale(1.2);
+            background: rgba(0, 180, 240, 1);
+        }
+
+        .info-hotspot::after {
+            content: 'i';
+            display: block;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .hotspot-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-hotspot:hover .hotspot-tooltip,
+        .info-hotspot:hover + .hotspot-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media only screen and (max-width: 768px) {
+            .nav-hotspot {
+                height: 50px;
+                width: 50px;
+                border: none;
+                background: none;
+                box-shadow: none;
+                border-radius: 0;
+                transition: all 0.3s ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0.9;
+                animation: pulse 2s infinite ease-in-out;
+            }
+
+            .nav-hotspot:hover {
+                transform: scale(1.2);
+                opacity: 1;
+                background: none;
+                box-shadow: none;
+            }
+
+            .nav-hotspot .icon {
+                width: 100%;
+                height: 100%;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L80,50 L50,70 L20,50 Z" fill="%2300c8ff" stroke="%23007acc" stroke-width="3"/><path d="M50,70 L80,50 L50,30 L20,50 Z" fill="%2300a0ff" stroke="%23007acc" stroke-width="3"/></svg>');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+                margin-bottom: 0;
+                transition: all 0.3s ease;
+            }
+
+            .nav-hotspot .icon[data-direction="back"] {
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) hue-rotate(180deg);
+            }
+
+            .nav-hotspot .icon[data-direction="up"] {
+                transform: rotate(-90deg);
+            }
+
+            .nav-hotspot .icon[data-direction="down"] {
+                transform: rotate(90deg);
+            }
+
+            .nav-hotspot .label {
+                display: none;
+            }
+
+            .hotspot-tooltip {
+                background: rgba(0,0,0,0.9);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                white-space: normal;
+                bottom: 120%;
+                transform: translateX(-50%);
+                text-align: center;
+                max-width: 200px;
+                pointer-events: none;
+            }
+
+            .info-hotspot {
+                height: 30px;
+                width: 30px;
+                background: rgba(0,200,255,0.8);
+            }
+
+            .info-hotspot::after {
+                font-size: 14px;
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); opacity: 0.8; }
+                50% { transform: scale(1.1); opacity: 1; }
+                100% { transform: scale(1); opacity: 0.8; }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="panorama"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+  <script>
+    function createNavigationHotspot(hotSpotDiv, args) {
+        var icon = document.createElement('div');
+        icon.className = 'icon';
+
+        const label = args.label.toLowerCase();
+        if(label.includes('back') || label.includes('voltar') || label.includes('saída')) {
+            icon.setAttribute('data-direction', 'back');
+        } else if(label.includes('up') || label.includes('subir')) {
+            icon.setAttribute('data-direction', 'up');
+        } else if(label.includes('down') || label.includes('descer')) {
+            icon.setAttribute('data-direction', 'down');
+        }
+
+        var labelElement = document.createElement('div');
+        labelElement.className = 'label';
+        labelElement.textContent = args.label;
+
+        var tooltip = document.createElement('div');
+        tooltip.className = 'hotspot-tooltip';
+        tooltip.textContent = args.tooltip;
+
+        hotSpotDiv.appendChild(icon);
+        hotSpotDiv.appendChild(labelElement);
+        hotSpotDiv.appendChild(tooltip);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewer = pannellum.viewer('panorama', {
+            "default": {
+                "firstScene": "cena1",
+                "sceneFadeDuration": 1000,
+                "autoLoad": true,
+                "autoRotate": -2
+            },
+            "scenes": {
+              "cena1": {
+    "title": "",
+    "hfov": 110,
+    "pitch": 0,
+    "yaw": 0,
+    "type": "equirectangular",
+    "panorama": "imagens/cena10.jpg",
+    "hotSpots": [
+        {
+            "pitch": -8,
+            "yaw": 0,
+            "type": "custom",
+            "cssClass": "nav-hotspot",
+            "createTooltipFunc": function(hotSpotDiv, args) {
+                var icon = document.createElement('div');
+                icon.className = 'icon';
+
+                var labelElement = document.createElement('div');
+                labelElement.className = 'label';
+                labelElement.textContent = args.label;
+
+                var tooltip = document.createElement('div');
+                tooltip.className = 'hotspot-tooltip';
+                tooltip.textContent = args.tooltip;
+
+                hotSpotDiv.appendChild(icon);
+                hotSpotDiv.appendChild(labelElement);
+                hotSpotDiv.appendChild(tooltip);
+
+                hotSpotDiv.addEventListener('click', function () {
+                    viewer.loadScene("cena2");
+                });
+            },
+            "createTooltipArgs": {
+                "label": "START",
+                "tooltip": "Ir para o Corredor Principal"
+            }
+        }
+    ]
+},
+                "cena2": {
+                    "title": "Corredor",
+                    "hfov": 110,
+                    "pitch": 0,
+                    "yaw": 0,
+                    "type": "equirectangular",
+                    "panorama": "imagens/cena2.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -10,
+                            "yaw": -3,
+                            "type": "scene",
+                            "text": "Avançar no corredor",
+                            "sceneId": "cena3",
+                            "cssClass": "nav-hotspot",
+                            "createTooltipFunc": createNavigationHotspot,
+                            "createTooltipArgs": {
+                                "label": "SEGUIR",
+                                "tooltip": "Continuar pelo corredor"
+                            }
+                        },
+                        {
+                            "pitch": -5,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "Voltar para Fachada",
+                            "sceneId": "cena1",
+                            "cssClass": "nav-hotspot",
+                            "createTooltipFunc": createNavigationHotspot,
+                            "createTooltipArgs": {
+                                "label": "BACK",
+                                "tooltip": "Retornar à entrada"
+                            }
+                        }
+                    ]
+                },
+                "cena3": {
+                    "title": "Corredor",
+                    "hfov": 110,
+                    "pitch": 0,
+                    "yaw": 0,
+                    "type": "equirectangular",
+                    "panorama": "imagens/cena3.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -10,
+                            "yaw": 9,
+                            "type": "scene",
+                            "text": "Ir para Sala",
+                            "sceneId": "cena4",
+                            "cssClass": "nav-hotspot",
+                            "createTooltipFunc": createNavigationHotspot,
+                            "createTooltipArgs": {
+                                "label": "ENTRAR",
+                                "tooltip": "Acessar a Sala Principal"
+                            }
+                        },
+                        {
+                            "pitch": -5,
+                            "yaw": 180,
+                            "type": "scene",
+                            "text": "Voltar no corredor",
+                            "sceneId": "cena2",
+                            "cssClass": "nav-hotspot",
+                            "createTooltipFunc": createNavigationHotspot,
+                            "createTooltipArgs": {
+                                "label": "Voltar",
+                                "tooltip": "Retornar pelo corredor"
+                            }
+                        }
+                    ]
+                },
+                "cena4": {
+                    "title": "Sala",
+                    "hfov": 110,
+                    "pitch": 0,
+                    "yaw": 0,
+                    "type": "equirectangular",
+                    "panorama": "imagens/cena4.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 140,
+                            "type": "scene",
+                            "text": "Voltar para Fachada",
+                            "sceneId": "cena1",
+                            "cssClass": "nav-hotspot",
+                            "createTooltipFunc": createNavigationHotspot,
+                            "createTooltipArgs": {
+                                "label": "Saída",
+                                "tooltip": "Voltar para a entrada"
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+        viewer.on('error', function (error) {
+            console.error('Erro ao carregar o tour virtual:', error);
+            alert('Erro ao carregar o tour virtual. Verifique o console para mais detalhes.');
+        });
+    });
+</script>
+
+</body>
+</html>
