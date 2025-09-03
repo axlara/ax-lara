@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio VR | Experiências Imersivas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #3c2297;
+            --accent: #4e3bf6;
+            --neon-blue: #00fff7;
+            --neon-purple: #441799;
+            --text: #f5f5f5d0;
+            --text-secondary: #a0a0a0;
+            --card-bg: rgba(30, 20, 40, 0.8);
+            --section-bg: rgba(20, 15, 30, 0.7);
+            --glow: 0 0 10px rgba(123, 97, 255, 0.5), 0 0 15px rgba(123, 97, 255, 0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            line-height: 1.6;
+            background-image: 
+                linear-gradient(to bottom, #050505, #050505, #050505);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Efeito de partículas simplificado */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 10% 20%, rgba(123, 97, 255, 0.3), transparent 50%),
+                radial-gradient(2px 2px at 90% 70%, rgba(192, 38, 211, 0.3), transparent 50%),
+                radial-gradient(1px 1px at 30% 85%, rgba(59, 130, 246, 0.2), transparent 50%),
+                radial-gradient(1px 1px at 70% 10%, rgba(0, 229, 255, 0.2), transparent 50%);
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1 0 auto; /* Permite que o container cresça para preencher o espaço */
+        }
+        
+        header {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .logo {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .logo .neon-x {
+            color: var(--neon-blue);
+            display: inline-block;
+            transform: translateZ(0);
+            text-shadow: 
+                0 0 5px var(--neon-blue),
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-blue),
+                0 0 40px rgba(0, 229, 255, 0.5);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from {
+                text-shadow: 
+                    0 0 5px var(--neon-blue),
+                    0 0 10px var(--neon-blue),
+                    0 0 20px var(--neon-blue),
+                    0 0 40px rgba(0, 229, 255, 0.5);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px var(--neon-blue),
+                    0 0 20px var(--neon-blue),
+                    0 0 30px var(--neon-blue),
+                    0 0 50px rgba(0, 229, 255, 0.8),
+                    0 0 70px rgba(192, 38, 211, 0.6);
+            }
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin: 25px 0 40px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .vr-background {
+            position: fixed;
+            bottom: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            opacity: 0.3;
+            z-index: 1;
+            animation: float 10s ease-in-out infinite;
+            pointer-events: none;
+            border-radius: 50px;
+            filter: blur(0.1px);
+             border: 1px solid rgba(0, 255, 247, 0.5);
+            box-shadow: 
+                0 0 15px rgb(0, 255, 247),
+                0 0 30px rgba(0, 255, 247, 0.637),
+                inset 0 0 20px rgba(0, 255, 247, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        
+        .artist-section {
+            width: 100%;
+            margin: 50px 0 80px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 50px 0;
+            background: var(--section-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* Efeito neon azul na borda */
+            border: 1px solid rgba(0, 255, 247, 0.2);
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .artist-section:hover {
+            box-shadow: 
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1);
+            border: 1px solid rgba(0, 255, 247, 0.3);
+        }
+        
+        .artist-title {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 3px;
+        }
+        
+        .artist-title::after {
+            content: "";
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            margin: 20px auto 0;
+        }
+        
+        .artist-subtitle {
+            font-size: 1.7rem;
+            color: var(--text);
+            margin-bottom: 40px;
+            font-weight: 400;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 0 20px;
+            letter-spacing: 3px;
+        }
+        
+        .artist-description {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.9;
+            padding: 0 30px;
+            color: var(--text-secondary);
+        }
+        
+        .artist-description p {
+            margin-bottom: 25px;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            margin: 60px auto;
+            opacity: 0.5;
+        }
+        
+        .projects-section {
+            margin: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 3px;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            margin: 20px auto 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 255, 247, 0.2);
+            position: relative;
+            /* Efeito neon azul na borda */
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05);
+        }
+        
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1);
+            border: 1px solid rgba(0, 255, 247, 0.4);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image::after {
+            transform: scaleX(1);
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .project-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-tag {
+            background: rgba(123, 97, 255, 0.15);
+            color: var(--neon-blue);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(123, 97, 255, 0.3);
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-released {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--neon-blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .status-development {
+            background: rgba(255, 165, 0, 0.15);
+            color: #ffa500;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+        
+        .project-detail {
+            margin: 100px auto;
+            max-width: 900px;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            /* Efeito neon azul na borda */
+            border: 1px solid rgba(0, 255, 247, 0.2);
+            box-shadow: 
+                0 0 10px rgba(0, 255, 247, 0.1),
+                0 0 20px rgba(0, 255, 247, 0.05),
+                inset 0 0 15px rgba(0, 255, 247, 0.05),
+                0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .project-detail:hover {
+            box-shadow: 
+                0 0 15px rgba(0, 255, 247, 0.2),
+                0 0 25px rgba(0, 255, 247, 0.1),
+                inset 0 0 20px rgba(0, 255, 247, 0.1),
+                0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 247, 0.3);
+        }
+        
+        .video-container {
+            width: 100%;
+            margin: 40px auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border: 1px solid rgba(123, 97, 255, 0.3);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .manifesto-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .manifesto-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            text-align: left;
+            display: inline-block;
+            max-width: 700px;
+            color: var(--text-secondary);
+        }
+        
+        .manifesto-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .language-toggle {
+            margin: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .language-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 1.5rem;
+            padding: 0.5rem 0;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .language-toggle button:hover,
+        .language-toggle button.active {
+            color: var(--text);
+        }
+        
+        .language-toggle button.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            animation: underline 0.3s ease-out;
+        }
+        
+        @keyframes underline {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        .pt { display: block; }
+        .en { display: none; }
+        
+       footer {
+        background: rgba(10, 10, 15, 0.9);
+        color: var(--text);
+        padding: 60px 0;
+        text-align: center;
+        border-top: 1px solid rgba(123, 97, 255, 0.2);
+        position: relative;
+        z-index: 2;
+        width: 100%; /* Garante que ocupe 100% da largura */
+        margin-top: 100px;
+        left: 0;
+        right: 0;
+    }
+    
+    footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+    }
+    
+    .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px; /* Adiciona padding para não colar nas bordas em mobile */
+    }
+    
+    .footer-content p {
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+    }
+        
+        .contact-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .contact-link::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--text);
+        }
+        
+        .contact-link:hover::after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 60px 0 30px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .artist-title {
+                font-size: 2rem;
+            }
+            
+            .artist-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .artist-section {
+                padding: 30px 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .vr-background {
+                width: 300px;
+                height: 300px;
+                opacity: 0.05;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .project-detail {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Imagem grande de fundo no canto -->
+    <img class="vr-background" src="https://static.vecteezy.com/system/resources/previews/041/917/459/non_2x/cardboard-glasses-virtual-reality-headset-vr-box-icon-in-line-style-design-isolated-on-white-background-editable-stroke-vector.jpg" alt="VR Headset Background">
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">VR E<span class="neon-x">X</span>PERIENCES</a>
+            <p class="tagline">Imersão criativa, tecnologia e experiências em realidade virtual</p>
+        </header>
+
+        <!-- Seção Artista VR -->
+        <div class="artist-section">
+            <h1 class="artist-title">EXPERIÊNCIAS AUTORAIS EM REALIDADE VIRTUAL</h1>
+            <h2 class="artist-subtitle">CRIAÇÕES IMERSIVAS QUE TRANSFORMAM MEMÓRIAS E LUGARES EM VIVÊNCIAS ÚNICAS</h2>
+            
+            <div class="artist-description">
+                <p>Meu trabalho une <span class="highlight">expressão criativa</span>, <span class="highlight">storytelling imersivo</span> e <span class="highlight">tecnologia</span> para dar vida a histórias de pessoas, cidades e espaços — criando mundos virtuais que despertam emoção, reflexão e conexão.</p>
+                
+                <p>Através da realidade virtual, desenvolvo experiências que capturam a essência de momentos efêmeros, transformando memórias pessoais e patrimônios culturais em jornadas que permanecem no imaginário.</p>
+                
+                <p>Cada projeto é uma ponte entre o real e o virtual — entre o que já vivemos e o que ainda podemos imaginar — uma exploração envolvente que convida ao reencontro com nossas próprias histórias.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+    <!-- Seção Projetos Lançados -->
+<div class="projects-section">
+    <h2 class="section-title">PROJETOS LANÇADOS</h2>
+    
+    <div class="projects-grid" style="justify-items: center;">
+        <!-- Projeto Memories Live -->
+        <div class="project-card" style="grid-column: 1 / -1; max-width: 400px;">
+            <div class="project-image">
+                <img src="imagens/vr_memorieslive.png" alt="VR Memories Live">
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">VR Memories Live</h3>
+                <p class="project-description">Imersão poética para reviver memórias especiais de forma personalizada, combinando tecnologia VR com narrativas emocionais.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">A-frame</span>
+                    <span class="tech-tag">Oculus</span>
+                    <span class="tech-tag">360 Video</span>
+                </div>
+                <span class="project-status status-released">Lançado</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção Projetos em Desenvolvimento -->
+<div class="projects-section">
+    <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
+   <div class="projects-grid">
+    <!-- Projeto Histórico em Realidade Virtual -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="imagens/vr_city.png" alt="Viagem no Tempo VR">
+        </div>
+        <div class="project-content">
+            <h3 class="project-title">Viagem no Tempo VR</h3>
+            <p class="project-description">
+                Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo. Colocando os óculos de realidade virtual, é possível caminhar por paisagens do passado e do presente, revivendo a história de lugares reais com base em memórias urbanas e registros históricos. Ideal para museus e centros culturais.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">A-Frame</span>
+                <span class="tech-tag">WebVR</span>
+                <span class="tech-tag">História Urbana</span>
+            </div>
+            <span class="project-status status-development">Em desenvolvimento</span>
+        </div>
+    </div>
+
+    <!-- Projeto de Interiores em VR -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="imagens/VR_img.png" alt="Interiores Imersivos VR">
+        </div>
+        <div class="project-content">
+            <h3 class="project-title">Interiores Imersivos VR</h3>
+            <p class="project-description">
+                Visualização de projetos arquitetônicos residenciais em realidade virtual. A partir de modelos 3D enviados pelo arquiteto via SketchUp, os usuários podem explorar cada cômodo da futura casa como se já estivessem dentro dela, usando os óculos Meta Quest. Ideal para apresentações realistas e decisões assertivas de design.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">SketchUp</span>
+                <span class="tech-tag">Meta Quest</span>
+                <span class="tech-tag">Arquitetura</span>
+            </div>
+            <span class="project-status status-development">Em desenvolvimento</span>
+        </div>
+    </div>
+</div>
+
+        
+  
+        <!-- Detalhamento do Memories Live -->
+        <div class="project-detail">
+            <h2 class="section-title">VR MEMORIES LIVE</h2>
+            
+            <div class="project-intro">
+                O projeto que deu início a esta jornada — uma <span class="highlight">imersão poética</span> para reviver memórias especiais de forma personalizada, combinando tecnologia VR com narrativas emocionais.
+            </div>
+            
+            <div class="language-toggle">
+                <button class="active" onclick="toggleLanguage('pt')">Português</button>
+                <button onclick="toggleLanguage('en')">English</button>
+            </div>
+            
+            <div class="manifesto-text pt">
+                <p>No começo, pode parecer apenas um presente único, uma recordação imersiva para guardar momentos preciosos. Um presente que toca o coração emoções, como um abraço que se pode sentir mesmo à distância.</p>
+                
+                <p>Mas, para quem se permite olhar além, Memories Live é muito mais: é uma jornada sutil e profunda pelo seu passado, pelas lembranças que moldaram quem você é hoje.</p>
+                
+                <p>É um convite para ativar memórias esquecidas, para se reconectar com a sua essência, com os sonhos e sentimentos que você talvez tenha deixado pelo caminho.</p>
+                
+                <p>Não é apenas reviver momentos — é reencontrar a si mesmo, é um despertar delicado que pode abrir portas para autoconhecimento, cura e transformação.</p>
+                
+                <p>Memories Live é feito para ser descoberto no tempo certo, para quem quiser e puder ir além do presente and tocar o que realmente importa.</p>
+                
+                <p>É um presente que cresce com você, um presente para a alma.</p>
+            </div>
+            
+            <div class="manifesto-text en">
+                <p>At first, it may seem like just a unique gift — an immersive keepsake to hold precious moments close. A gift that touches the heart and lets you relive emotions, like a warm embrace you can feel even from afar.</p>
+                
+                <p>But for those who allow themselves to look deeper, Memories Live is much more: a subtle and profound journey into your past, into the memories that shaped who you are today.</p>
+                
+                <p>It's an invitation to activate forgotten memories, to reconnect with your essence, with dreams and feelings you may have left behind.</p>
+                
+                <p>It's not just about reliving moments — it's about rediscovering yourself, a gentle awakening that can open doors to self-awareness, healing, and transformation.</p>
+                
+                <p>Memories Live is designed to be discovered in its own time, for those willing and able to go beyond the present and touch what truly matters.</p>
+                
+                <p>It's a gift that grows with you, a gift for the soul.</p>
+            </div>
+            
+            <!-- Espaço para o vídeo do projeto -->
+            <div class="video-container">
+                <!-- Substitua pelo seu embed de vídeo -->
+                <iframe src="https://www.youtube.com/embed/SEU_CODIGO_DO_VIDEO" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>Interessado em colaborar ou saber mais sobre meus projetos?</p>
+            <p>Entre em contato: <a href="mailto:contato@exemplo.com" class="contact-link">contato@exemplo.com</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleLanguage(lang) {
+            if (lang === 'pt') {
+                document.querySelector('.pt').style.display = 'block';
+                document.querySelector('.en').style.display = 'none';
+                document.querySelectorAll('.language-toggle button')[0].classList.add('active');
+                document.querySelectorAll('.language-toggle button')[1].classList.remove('active');
+            } else {
+                document.querySelector('.pt').style.display = 'none';
+                document.querySelector('.en').style.display = 'block';
+                document.querySelectorAll('.language-toggle button')[0].classList.remove('active');
+                document.querySelectorAll('.language-toggle button')[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
