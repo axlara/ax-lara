@@ -36,17 +36,27 @@
             position: relative;
             min-height: 100vh;
             line-height: 1.6;
-            /* Background otimizado para mobile */
-            background: 
-                linear-gradient(rgba(5, 5, 5, 0.663), rgba(5, 5, 5, 0.85)),
-                url('/imagens/bgstars2.png') no-repeat center center fixed;
-            background-size: cover;
             display: flex;
             flex-direction: column;
         }
 
-        /* Efeito de partículas */
+        /* Background fixo para desktop e ajustado para mobile */
         body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(5, 5, 5, 0.663), rgba(5, 5, 5, 0.85)),
+                url('/imagens/bgstars2.png') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        /* Efeito de partículas */
+        body::after {
             content: "";
             position: fixed;
             top: 0;
@@ -525,25 +535,25 @@
             color: var(--primary);
         }
         
-        /* Estilo para o óculos VR flutuante - SEM QUADRO, COM FLUTUAÇÃO SUAVE */
+        /* Estilo para o óculos VR flutuante - CORRIGIDO PARA MOBILE */
         .vr-glasses-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: -1;
+            z-index: 999; /* Alterado para valor alto para ficar acima de outros elementos */
             width: 350px;
             height: 350px;
             transform: scale(1.2);
-            animation: float 6s ease-in-out infinite; /* Animação de flutuação */
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4)); /* Brilho neon ciano */
-            pointer-events: none; /* Não atrapalha cliques */
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+            pointer-events: none;
         }
 
         .vr-glasses {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            opacity: 0.60; /* Leve transparência para efeito holográfico */
+            opacity: 0.60;
             transition: all 0.3s ease;
         }
 
@@ -561,7 +571,7 @@
                 filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
             }
             50% {
-                transform: translateY(-15px) scale(1.25); /* Sobe um pouco */
+                transform: translateY(-15px) scale(1.25);
                 filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
             }
             100% {
@@ -627,13 +637,6 @@
             .project-detail {
                 padding: 25px 20px;
                 margin: 60px auto;
-            }
-            
-            /* Ajuste do background para mobile */
-            body {
-                background-attachment: scroll;
-                background-size: cover;
-                background-position: center;
             }
             
             /* Ajuste dos óculos VR para mobile */
@@ -713,7 +716,7 @@
                 height: 140px;
                 bottom: 5px;
                 right: 5px;
-                opacity: 0.5;
+                opacity: 0.6; /* Aumentei a opacidade para ficar mais visível */
             }
             
             .project-image {
@@ -725,7 +728,7 @@
             .vr-glasses-container {
                 width: 120px;
                 height: 120px;
-                opacity: 0.4;
+                opacity: 0.5; /* Ajuste de opacidade */
             }
             
             .intro-section {
@@ -737,10 +740,14 @@
             }
         }
         
-        /* Orientação paisagem em dispositivos móveis */
+        /* Orientação paisagem em dispositivos móveis - REMOVIDO display: none */
         @media (max-height: 500px) and (orientation: landscape) {
             .vr-glasses-container {
-                display: none; /* Esconde os óculos em modo paisagem para melhor experiência */
+                width: 100px;
+                height: 100px;
+                bottom: 5px;
+                right: 5px;
+                opacity: 0.4;
             }
             
             header {
@@ -758,7 +765,7 @@
     <div class="container">
         <header>
             <div class="logo">A<i>X</i>LARA<span class="logo-subtitle">aivrse studio </span></div>
-            <p class="subtitle">Portfólio de criações em tecnologia imersiva</p>
+            <!-- <p class="subtitle">Memória, Afeto e Tecnologia Imersiva</p> -->
         </header>
 
         <!-- Seção de Introdução -->
@@ -844,33 +851,33 @@
         </section>
   
         <!-- Detalhamento do Memories Live -->
-     <section class="project-detail">
-    <h2 class="section-title">VR MEMORIES LIVE</h2>
-    
-    <div class="language-toggle">
-        <button class="active" onclick="toggleLanguage('pt')">Português</button>
-        <button onclick="toggleLanguage('en')">English</button>
-    </div>
-    
-    <div class="manifesto-text pt">
-        <p>Memories Live é um projeto em realidade virtual voltado para a exploração e reconexão com a própria história de vida.</p>
-        
-        <p>A experiência é construída a partir das lembranças pessoais do usuário: fotos originais, fornecidas pela própria pessoa ou por alguém que deseja presentear, são integradas em um ambiente imersivo que permite reviver momentos desde a infância até os dias atuais.</p>
-        
-        <p>Mais do que uma experiência tecnológica, Memories Live é uma jornada sensível pelo passado, pelas lembranças que moldaram quem você é hoje. É um convite para reativar memórias esquecidas, reconectar-se com sua essência, sonhos e sentimentos que talvez tenham ficado pelo caminho.</p>
-        
-        <p>É também um estudo sobre como experiências imersivas podem despertar conexões profundas e abrir caminhos para autoconhecimento, cura e transformação.</p>
-    </div>
-    
-    <div class="manifesto-text en">
-        <p>Memories Live is a virtual reality project focused on exploring and reconnecting with one's own life story.</p>
-        
-        <p>The experience is built from the user's personal memories: original photos, provided by the person themselves or by someone who wants to gift the experience, are integrated into an immersive environment that allows reliving moments from childhood to the present day.</p>
-        
-        <p>More than a technological experience, Memories Live is a sensitive journey into the past, into the memories that shaped who you are today. It's an invitation to reactivate forgotten memories, reconnect with your essence, dreams and feelings that may have been left behind.</p>
-        
-        <p>It is also a study of how immersive experiences can awaken deep connections and open paths to self-knowledge, healing and transformation.</p>
-    </div>
+        <section class="project-detail">
+            <h2 class="section-title">VR MEMORIES LIVE</h2>
+            
+            <div class="language-toggle">
+                <button class="active" onclick="toggleLanguage('pt')">Português</button>
+                <button onclick="toggleLanguage('en')">English</button>
+            </div>
+            
+            <div class="manifesto-text pt">
+                <p>Memories Live é um projeto em realidade virtual voltado para a exploração e reconexão com a própria história de vida.</p>
+                
+                <p>A experiência é construída a partir das lembranças pessoais do usuário: fotos originais, fornecidas pela própria pessoa ou por alguém que deseja presentear, são integradas em um ambiente imersivo que permite reviver momentos desde a infância até os dias atuais.</p>
+                
+                <p>Mais do que uma experiência tecnológica, Memories Live é uma jornada sensível pelo passado, pelas lembranças que moldaram quem você é hoje. É um convite para reativar memórias esquecidas, reconectar-se com sua essência, sonhos и sentimentos que talvez tenham ficado pelo caminho.</p>
+                
+                <p>É também um estudo sobre como experiências imersivas podem despertar conexões profundas e abrir caminhos para autoconhecimento, cura e transformação.</p>
+            </div>
+            
+            <div class="manifesto-text en">
+                <p>Memories Live is a virtual reality project focused on exploring and reconnecting with one's own life story.</p>
+                
+                <p>The experience is built from the user's personal memories: original photos, provided by the person themselves or by someone who wants to gift the experience, are integrated into an immersive environment that allows reliving moments from childhood to the present day.</p>
+                
+                <p>More than a technological experience, Memories Live is a sensitive journey into the past, into the memories that shaped who you are today. It's an invitation to reactivate forgotten memories, reconnect with your essence, dreams and feelings that may have been left behind.</p>
+                
+                <p>It is also a study of how immersive experiences can awaken deep connections and open paths to self-knowledge, healing and transformation.</p>
+            </div>
             
             <!-- Espaço para o vídeo do projeto -->
             <div class="video-container">
@@ -884,7 +891,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>Disponível para colaborações, projetos personalizados e experiências imersivas sob demanda.</p>
+            <p>Disponível para projetos colaborativos e experiências sob demanda</p>
             <p>Entre em contato: <a href="mailto:contato@axlara.com" class="contact-link">contato@axlara.com</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-linkedin"></i></a>
