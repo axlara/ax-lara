@@ -25,7 +25,8 @@
             margin: 0;
             padding: 0;
         }
-         body {
+        
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
@@ -35,7 +36,7 @@
             position: relative;
             min-height: 100vh;
             line-height: 1.6;
-            /* AQUI ESTÁ A IMAGEM DE FUNDO - SUBSTITUA PELO SEU CAMINHO CORRETO */
+            /* Background otimizado para mobile */
             background: 
                 linear-gradient(rgba(5, 5, 5, 0.663), rgba(5, 5, 5, 0.85)),
                 url('/imagens/bgstars2.png') no-repeat center center fixed;
@@ -43,7 +44,6 @@
             display: flex;
             flex-direction: column;
         }
-
 
         /* Efeito de partículas */
         body::before {
@@ -287,15 +287,16 @@
         }
         
         .project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-.project-card:hover .project-image img {
-    transform: scale(1.05);
-}
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
         .project-image::after {
             content: "";
             position: absolute;
@@ -524,7 +525,68 @@
             color: var(--primary);
         }
         
-        /* Responsividade */
+        /* Estilo para o óculos VR flutuante - SEM QUADRO, COM FLUTUAÇÃO SUAVE */
+        .vr-glasses-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: -1;
+            width: 350px;
+            height: 350px;
+            transform: scale(1.2);
+            animation: float 6s ease-in-out infinite; /* Animação de flutuação */
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4)); /* Brilho neon ciano */
+            pointer-events: none; /* Não atrapalha cliques */
+        }
+
+        .vr-glasses {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.60; /* Leve transparência para efeito holográfico */
+            transition: all 0.3s ease;
+        }
+
+        .vr-glasses:hover {
+            opacity: 1;
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8))
+                       drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
+        }
+
+        /* Animação de flutuação suave */
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1.2);
+                filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+            }
+            50% {
+                transform: translateY(-15px) scale(1.25); /* Sobe um pouco */
+                filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+            }
+            100% {
+                transform: translateY(0) scale(1.2);
+                filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
+            }
+        }
+        
+        /* Responsividade - Mobile First Approach */
+        @media (max-width: 1200px) {
+            .vr-glasses-container {
+                width: 280px;
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .vr-glasses-container {
+                width: 220px;
+                height: 220px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
@@ -566,9 +628,41 @@
                 padding: 25px 20px;
                 margin: 60px auto;
             }
+            
+            /* Ajuste do background para mobile */
+            body {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center;
+            }
+            
+            /* Ajuste dos óculos VR para mobile */
+            .vr-glasses-container {
+                width: 180px;
+                height: 180px;
+                bottom: 10px;
+                right: 10px;
+                transform: scale(1);
+                animation: float-mobile 6s ease-in-out infinite;
+            }
+            
+            @keyframes float-mobile {
+                0% {
+                    transform: translateY(0) scale(1);
+                    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+                }
+                50% {
+                    transform: translateY(-10px) scale(1.1);
+                    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+                }
+                100% {
+                    transform: translateY(0) scale(1);
+                    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+                }
+            }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
             .logo {
                 font-size: 1.2rem;
                 letter-spacing: 2px;
@@ -603,58 +697,68 @@
             .footer-content {
                 padding: 0 15px;
             }
+            
+            .manifesto-text {
+                font-size: 1rem;
+            }
+            
+            .language-toggle button {
+                font-size: 0.85rem;
+                margin: 0 0.5rem;
+            }
+            
+            /* Ajuste final dos óculos VR para telas muito pequenas */
+            .vr-glasses-container {
+                width: 140px;
+                height: 140px;
+                bottom: 5px;
+                right: 5px;
+                opacity: 0.5;
+            }
+            
+            .project-image {
+                height: 180px;
+            }
         }
-/* Estilo para o óculos VR flutuante - SEM QUADRO, COM FLUTUAÇÃO SUAVE */
-.vr-glasses-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: -1;
-    width: 350px;
-    height: 350px;
-    transform: scale(1.2);
-    animation: float 6s ease-in-out infinite; /* Animação de flutuação */
-    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4)); /* Brilho neon ciano */
-    pointer-events: none; /* Não atrapalha cliques */
-}
-
-.vr-glasses {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0.60; /* Leve transparência para efeito holográfico */
-    transition: all 0.3s ease;
-}
-
-.vr-glasses:hover {
-    opacity: 1;
-    transform: scale(1.3);
-    filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8))
-               drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
-}
-
-/* Animação de flutuação suave */
-@keyframes float {
-    0% {
-        transform: translateY(0) scale(1.2);
-        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
-    }
-    50% {
-        transform: translateY(-15px) scale(1.25); /* Sobe um pouco */
-        filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
-    }
-    100% {
-        transform: translateY(0) scale(1.2);
-        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4));
-    }
-}
+        
+        @media (max-width: 400px) {
+            .vr-glasses-container {
+                width: 120px;
+                height: 120px;
+                opacity: 0.4;
+            }
+            
+            .intro-section {
+                padding: 20px 0;
+            }
+            
+            .intro-description p {
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Orientação paisagem em dispositivos móveis */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .vr-glasses-container {
+                display: none; /* Esconde os óculos em modo paisagem para melhor experiência */
+            }
+            
+            header {
+                padding: 30px 0 15px;
+            }
+            
+            .intro-section {
+                margin: 20px 0 40px;
+                padding: 20px 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo">A<i>X</i>LARA<span class="logo-subtitle">aivrse studio </span></div>
-            <p class="subtitle">Portfólio VR & Experiências Imersivas</p>
+            <p class="subtitle">Portfólio de criações em tecnologia imersiva</p>
         </header>
 
         <!-- Seção de Introdução -->
@@ -671,8 +775,6 @@
             </div>
         </section>
 
-       
-
         <!-- Seção Projetos Lançados -->
         <section class="projects-section">
             <h2 class="section-title">PROJETOS LANÇADOS</h2>
@@ -681,7 +783,7 @@
                 <!-- Projeto Memories Live -->
                 <article class="project-card">
                     <div class="project-image">
-                       <img src="/imagens/vr_memorieslive.png "alt="Memories Live" loading="lazy">
+                       <img src="/imagens/vr_memorieslive.png" alt="Memories Live" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">VR Memories Live</h3>
@@ -697,33 +799,33 @@
             </div>
         </section>
 
-<!-- Seção Projetos em Desenvolvimento -->
-<section class="projects-section">
-    <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
-    <div class="projects-grid">
-        <!-- Projeto Histórico em Realidade Virtual -->
-        <article class="project-card">
-            <div class="project-image">
-                <img src="/imagens/vr_citytime.png" alt="Viagem no Tempo VR" loading="lazy">
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Viagem no Tempo VR</h3>
-                <p class="project-description">
-                    Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo, revivendo a história de lugares reais.
-                </p>
-                <div class="project-tech">
-                    <span class="tech-tag">A-Frame</span>
-                    <span class="tech-tag">WebVR</span>
-                    <span class="tech-tag">História Urbana</span>
-                </div>
-                <span class="project-status status-development">Em desenvolvimento</span>
-            </div>
-        </article>
+        <!-- Seção Projetos em Desenvolvimento -->
+        <section class="projects-section">
+            <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
+            <div class="projects-grid">
+                <!-- Projeto Histórico em Realidade Virtual -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="/imagens/vr_citytime.png" alt="Viagem no Tempo VR" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Viagem no Tempo VR</h3>
+                        <p class="project-description">
+                            Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo, revivendo a história de lugares reais.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">A-Frame</span>
+                            <span class="tech-tag">WebVR</span>
+                            <span class="tech-tag">História Urbana</span>
+                        </div>
+                        <span class="project-status status-development">Em desenvolvimento</span>
+                    </div>
+                </article>
 
                 <!-- Projeto de Interiores em VR -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="/imagens/VR_img.png "alt="Memories Live" loading="lazy">
+                        <img src="/imagens/VR_img.png" alt="Interiores Imersivos VR" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Interiores Imersivos VR</h3>
@@ -742,55 +844,47 @@
         </section>
   
         <!-- Detalhamento do Memories Live -->
-        <section class="project-detail">
-            <h2 class="section-title">VR MEMORIES LIVE</h2>
-            
-            <div class="language-toggle">
-                <button class="active" onclick="toggleLanguage('pt')">Português</button>
-                <button onclick="toggleLanguage('en')">English</button>
-            </div>
-            
-            <div class="manifesto-text pt">
-                <p>No começo, pode parecer apenas um presente único, uma recordação imersiva para guardar momentos preciosos. Um presente que toca o coração emoções, como um abraço que se pode sentir mesmo à distância.</p>
-                
-                <p>Mais do que uma experiência tecnológica, Memories Live é uma jornada sensível pelo seu passado, pelas lembranças que moldaram quem você é hoje.</p>
-                
-                <p>É um convite para reativar memórias esquecidas, para se reconectar com sua essência, com os sonhos e sentimentos que você talvez tenha deixado pelo caminho.</p>
-                
-                <p>Não é apenas reviver momentos — é reencontrar a si mesmo, é um despertar delicado que pode abrir portas para autoconhecimento, cura e transformação.</p>
-                
-                <p>Memories Live é feito para ser descoberto no tempo certo, para quem quiser e puder ir além do presente e tocar o que realmente importa.</p>
-                
-                <p>É um presente que cresce com você, um presente para a alma.</p>
-            </div>
-            
-            <div class="manifesto-text en">
-                <p>At first, it may seem like just a unique gift — an immersive keepsake to hold precious moments close. A gift that touches the heart and lets you relive emotions, like a warm embrace you can feel even from afar.</p>
-                
-                <p>More than a technological experience, Memories Live is a sensitive journey into your past, into the memories that shaped who you are today.</p>
-                
-                <p>It's an invitation to reactivate forgotten memories, to reconnect with your essence, with dreams and feelings you may have left behind.</p>
-                
-                <p>It's not just about reliving moments — it's about rediscovering yourself, a gentle awakening that can open doors to self-awareness, healing, and transformation.</p>
-                
-                <p>Memories Live is designed to be discovered in its own time, for those willing and able to go beyond the present and touch what truly matters.</p>
-                
-                <p>It's a gift that grows with you, a gift for the soul.</p>
-            </div>
+     <section class="project-detail">
+    <h2 class="section-title">VR MEMORIES LIVE</h2>
+    
+    <div class="language-toggle">
+        <button class="active" onclick="toggleLanguage('pt')">Português</button>
+        <button onclick="toggleLanguage('en')">English</button>
+    </div>
+    
+    <div class="manifesto-text pt">
+        <p>Memories Live é um projeto em realidade virtual voltado para a exploração e reconexão com a própria história de vida.</p>
+        
+        <p>A experiência é construída a partir das lembranças pessoais do usuário: fotos originais, fornecidas pela própria pessoa ou por alguém que deseja presentear, são integradas em um ambiente imersivo que permite reviver momentos desde a infância até os dias atuais.</p>
+        
+        <p>Mais do que uma experiência tecnológica, Memories Live é uma jornada sensível pelo passado, pelas lembranças que moldaram quem você é hoje. É um convite para reativar memórias esquecidas, reconectar-se com sua essência, sonhos e sentimentos que talvez tenham ficado pelo caminho.</p>
+        
+        <p>É também um estudo sobre como experiências imersivas podem despertar conexões profundas e abrir caminhos para autoconhecimento, cura e transformação.</p>
+    </div>
+    
+    <div class="manifesto-text en">
+        <p>Memories Live is a virtual reality project focused on exploring and reconnecting with one's own life story.</p>
+        
+        <p>The experience is built from the user's personal memories: original photos, provided by the person themselves or by someone who wants to gift the experience, are integrated into an immersive environment that allows reliving moments from childhood to the present day.</p>
+        
+        <p>More than a technological experience, Memories Live is a sensitive journey into the past, into the memories that shaped who you are today. It's an invitation to reactivate forgotten memories, reconnect with your essence, dreams and feelings that may have been left behind.</p>
+        
+        <p>It is also a study of how immersive experiences can awaken deep connections and open paths to self-knowledge, healing and transformation.</p>
+    </div>
             
             <!-- Espaço para o vídeo do projeto -->
             <div class="video-container">
-    <video controls width="100%" height="100%" style="object-fit: cover;" poster="imagens/vr_memorieslive.png">
-        <source src="" type="video/mp4">
-        Seu navegador não suporta o formato de vídeo.
-    </video>
-</div>
+                <video controls width="100%" height="100%" style="object-fit: cover;" poster="imagens/vr_memorieslive.png">
+                    <source src="" type="video/mp4">
+                    Seu navegador não suporta o formato de vídeo.
+                </video>
+            </div>
         </section>
     </div>
 
     <footer>
         <div class="footer-content">
-            <p>Interessado em colaborar ou saber mais sobre meus projetos?</p>
+            <p>Disponível para colaborações, projetos personalizados e experiências imersivas sob demanda.</p>
             <p>Entre em contato: <a href="mailto:contato@axlara.com" class="contact-link">contato@axlara.com</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -800,6 +894,11 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Óculos VR Gigante Flutuante com Efeito Neon -->
+    <div class="vr-glasses-container">
+        <img src="/imagens/Apple-Vision-Pro-VR-headset-AR-transparent-PNG-image.png" alt="Óculos VR Meta Quest" class="vr-glasses">
+    </div>
     
     <script>
         function toggleLanguage(lang) {
@@ -816,9 +915,5 @@
             }
         }
     </script>
-<!-- Óculos VR Gigante Flutuante com Efeito Neon -->
-<div class="vr-glasses-container">
-    <img src="/imagens/Apple-Vision-Pro-VR-headset-AR-transparent-PNG-image.png" alt="Óculos VR Meta Quest" class="vr-glasses">
-</div>
 </body>
 </html>
