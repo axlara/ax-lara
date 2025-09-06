@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    :root {
+ :root {
       --primary: #00fff7;
       --primary-dark: #00c9c3;
       --secondary: #6c42f5;
@@ -160,7 +160,71 @@
     .nav-menu a.active::after {
       width: 100%;
     }
-    
+    /* Botão hamburguer */
+.menu-toggle {
+  display: none; /* escondido no desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000; /* fica acima do menu */
+}
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* Menu padrão (desktop) */
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav-logo {
+    display: none;
+  }
+
+  /* mantém o toggle visível */
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* garante que as bandeirinhas fiquem visíveis no header */
+  .nav-flags {
+    margin-left: auto; /* joga pro canto direito */
+  }
+  .menu-toggle {
+    display: flex; /* aparece só no mobile */
+  }
+
+  .nav-menu {
+    display: none; /* escondido inicialmente */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* abaixo do header */
+    right: 10px;
+    background: rgba(0,0,0,0.9);
+    padding: 15px 20px;
+    border-radius: 8px;
+  }
+
+  .nav-menu.show {
+    display: flex; /* aparece quando ativado */
+  }
+
+  .nav-menu li {
+    margin: 10px 0;
+  }
+}
+
     /* Seção Hero - Gradiente unificado */
     .hero {
       display: flex;
@@ -895,104 +959,151 @@
       color: var(--primary);
     }
     
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .main-nav {
-        padding: 10px 0;
-      }
-      
-      .nav-menu {
-        gap: 15px;
-        font-size: 0.9rem;
-      }
-      
-      .hero {
-        padding: 6rem 1rem 2rem;
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .hero-container {
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-      
-      .hero-image img {
-        width: 80%;
-      }
-      
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .hero h2 {
-        font-size: 1.2rem;
-      }
-      
-      .vr-glasses-hero {
-        width: 120px;
-        height: 120px;
-        bottom: 15px;
-        right: 15px;
-        opacity: 0.5;
-      }
-      
-      .about {
-        padding: 60px 15px;
-      }
-      
-      .about .ola {
-        font-size: 1.8rem;
-      }
-      
-      .about p {
-        font-size: 1rem;
-      }
-      
-      .curriculum-cta {
-        padding: 40px 15px;
-      }
-      
-      .curriculum-content h3 {
-        font-size: 1.5rem;
-      }
-      
-      .curriculum-content p {
-        font-size: 1rem;
-      }
-      
-      .vr-section {
-        padding: 60px 15px;
-      }
-      
-      .vr-logo {
-        font-size: 1.5rem;
-      }
-      
-      .vr-subtitle {
-        font-size: 1.4rem;
-      }
-      
-      .vr-description {
-        font-size: 1rem;
-        padding: 0 15px;
-      }
-      
-      .projects-grid {
-        grid-template-columns: 1fr;
-        padding: 0 15px;
-      }
-      
-      .project-detail {
-        padding: 25px 20px;
-        margin: 40px auto;
-      }
-      
-      .section-title {
-        font-size: 1.4rem;
-      }
-    }
- 
+/* Responsividade */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 6rem 2rem 3rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-image img {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* NAV */
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-menu {
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+
+  /* HERO */
+  .hero {
+    flex-direction: column;
+    padding: 5rem 1rem 2rem;
+    text-align: center;
+  }
+  .hero-container {
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero h2 {
+    font-size: 1.1rem;
+  }
+  .hero .byline {
+    font-size: 0.8rem;
+  }
+  .hero-image {
+    margin-top: 20px;
+  }
+  .hero-image img {
+    width: 90%;
+    max-width: 250px;
+  }
+  .vr-glasses-hero {
+    display: none; /* escondido no mobile */
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 60px 15px;
+  }
+  .about .ola {
+    font-size: 1.8rem;
+  }
+  .about h2 {
+    font-size: 1.2rem;
+  }
+  .about p {
+    font-size: 1rem;
+  }
+
+  /* CURRICULUM */
+  .curriculum-cta {
+    padding: 60px 15px;
+  }
+  .curriculum-content h3 {
+    font-size: 1.4rem;
+  }
+  .curriculum-content p {
+    font-size: 1rem;
+  }
+
+  /* VR SECTION */
+  .vr-section {
+    padding: 60px 15px;
+  }
+  .vr-subtitle {
+    font-size: 1.2rem;
+  }
+  .vr-description {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+  .project-title {
+    font-size: 1.1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 30px 10px;
+  }
+  .footer-content p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+  .hero h2 {
+    font-size: 1rem;
+  }
+  .about .ola {
+    font-size: 1.5rem;
+  }
+  .about h2 {
+    font-size: 1rem;
+  }
+  .about p {
+    font-size: 0.95rem;
+  }
+  .curriculum-content h3 {
+    font-size: 1.2rem;
+  }
+  .vr-subtitle {
+    font-size: 1rem;
+  }
+  .vr-description {
+    font-size: 0.95rem;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1013,7 +1124,14 @@
   <nav class="main-nav">
     <div class="nav-container">
       <a href="#" class="nav-logo">A<i>X</i>LARA<span class="logo-subtitle">aivrse studio</span></a>
+      <button class="menu-toggle" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
       <ul class="nav-menu">
+        
         <li><a href="#home" class="active">Home</a></li>
         <li><a href="#about">Sobre</a></li>
         <li><a href="#curriculum">Currículo</a></li>
@@ -1211,6 +1329,12 @@
   </footer>
 
   <script type="text/javascript">
+    const toggleBtn = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+
+  toggleBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'pt',
