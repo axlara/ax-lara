@@ -7,8 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
- :root {
+  <style> :root {
       --primary: #00fff7;
       --primary-dark: #00c9c3;
       --secondary: #6c42f5;
@@ -177,6 +176,7 @@
   height: 3px;
   background: #fff;
   border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 /* Menu padrão (desktop) */
@@ -188,32 +188,26 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-    .nav-logo {
-    display: none;
+  .nav-container {
+    padding: 0 15px;
   }
-
+  
   /* mantém o toggle visível */
   .menu-toggle {
     display: flex;
   }
 
-  /* garante que as bandeirinhas fiquem visíveis no header */
-  .nav-flags {
-    margin-left: auto; /* joga pro canto direito */
-  }
-  .menu-toggle {
-    display: flex; /* aparece só no mobile */
-  }
-
   .nav-menu {
     display: none; /* escondido inicialmente */
     flex-direction: column;
-    position: absolute;
-    top: 60px; /* abaixo do header */
-    right: 10px;
-    background: rgba(0,0,0,0.9);
-    padding: 15px 20px;
-    border-radius: 8px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 15, 0.95);
+    padding: 20px;
+    border-top: 1px solid rgba(123, 97, 255, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 
   .nav-menu.show {
@@ -221,7 +215,14 @@
   }
 
   .nav-menu li {
-    margin: 10px 0;
+    margin: 12px 0;
+    text-align: center;
+  }
+  
+  .nav-menu a {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    display: block;
   }
 }
 
@@ -334,7 +335,7 @@
   position: relative;
   opacity: 0.9;
   animation: float-image 4s ease-in-out infinite;
-  border-radius: 15px;
+  border-radius: 100px;
   display: block;
 }
 
@@ -369,6 +370,7 @@
   
   .hero-image img {
     width: 80%;
+    max-width: 280px;
     border-radius: 12px;
   }
 }
@@ -584,7 +586,7 @@
       padding: 100px 20px;
       position: relative;
       background: 
-        linear-gradient(180deg, 
+             linear-gradient(180deg, 
           #050505 0%, 
           rgba(5, 5, 5, 0.95) 0%,
           rgba(5, 5, 5, 0.85) 10%,
@@ -592,6 +594,7 @@
         url('/imagens/bgstars2.png') no-repeat center center fixed;
       background-size: cover;
       text-align: center;
+
     }
     
     .vr-section::before {
@@ -981,42 +984,61 @@
 @media (max-width: 768px) {
   /* NAV */
   .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-menu {
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
   .nav-logo {
-    font-size: 1.2rem;
+  display: none;
+}
+  
+
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 15, 0.95);
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    display: none;
+  }
+
+  .nav-menu.show {
+    display: flex;
   }
 
   /* HERO */
   .hero {
     flex-direction: column;
-    padding: 5rem 1rem 2rem;
+    padding: 6rem 1rem 2rem;
     text-align: center;
+    min-height: auto;
   }
   .hero-container {
     max-width: 100%;
+    margin-bottom: 30px;
   }
   .hero h1 {
     font-size: 1.8rem;
   }
   .hero h2 {
     font-size: 1.1rem;
+    color: #cdcccc;
   }
   .hero .byline {
     font-size: 0.8rem;
+    color: #b7b7b7;
   }
   .hero-image {
     margin-top: 20px;
+    border-radius: 150px;
   }
   .hero-image img {
     width: 90%;
     max-width: 250px;
+    border-radius: 100px;
   }
   .vr-glasses-hero {
     display: none; /* escondido no mobile */
@@ -1034,6 +1056,7 @@
   }
   .about p {
     font-size: 1rem;
+    text-align: center;
   }
 
   /* CURRICULUM */
@@ -1046,10 +1069,21 @@
   .curriculum-content p {
     font-size: 1rem;
   }
+  
+  /* Ajuste do botão de currículo para mobile */
+  .curriculum-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+  }
 
   /* VR SECTION */
   .vr-section {
-    padding: 60px 15px;
+  padding: 60px 15px;
+  background-size: auto;
+    background-position: center top;
+    background-repeat: repeat-y; 
   }
   .vr-subtitle {
     font-size: 1.2rem;
@@ -1057,6 +1091,11 @@
   .vr-description {
     font-size: 1rem;
     padding: 0 10px;
+  }
+  
+  /* Correção do texto "utuk" para "para" */
+  .vr-description p:first-child {
+    text-align: center;
   }
 
   /* PROJECTS */
@@ -1066,6 +1105,11 @@
   }
   .project-title {
     font-size: 1.1rem;
+  }
+  
+  .project-detail {
+    padding: 20px;
+    margin: 40px auto;
   }
 
   /* FOOTER */
@@ -1100,6 +1144,36 @@
     font-size: 1rem;
   }
   .vr-description {
+    font-size: 0.95rem;
+  }
+  
+  .language-bar {
+    top: 5px;
+    right: 10px;
+  }
+  
+  .language-bar button img {
+    width: 20px;
+    height: 14px;
+  }
+}
+
+/* Ajustes específicos para iPhone 11 */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  .hero {
+    padding-top: 7rem;
+  }
+  
+  .nav-container {
+    padding: 0 15px;
+  }
+  
+  .hero-image img {
+    max-width: 220px;
+  }
+  
+  .curriculum-button {
+    padding: 14px 20px;
     font-size: 0.95rem;
   }
 }
@@ -1200,7 +1274,7 @@
       <h2 class="vr-subtitle">EXPERIÊNCIAS AUTORAIS EM REALIDADE VIRTUAL</h2>
       
       <div class="vr-description">
-        <p>Meu trabalho une <span class="highlight">expressão criativa</span>, <span class="highlight">storytelling imersivo</span> e <span class="highlight">tecnologia</span> untuk dar vida a histórias de pessoas, cidades e espaços — criando mundos virtuais que despertam emoção, reflexão e conexão.</p>
+        <p>Meu trabalho une <span class="highlight">expressão criativa</span>, <span class="highlight">storytelling imersivo</span> e <span class="highlight">tecnologia</span> para dar vida a histórias de pessoas, cidades e espaços — criando mundos virtuais que despertam emoção, reflexão e conexão.</p>
         
         <p>Através da realidade virtual, desenvolvo experiências que capturam a essência de momentos efêmeros, transformando memórias pessoais e patrimônios culturais em jornadas que permanecem no imaginário.</p>
         
@@ -1318,11 +1392,11 @@
   <footer id="contact">
     <div class="footer-content">
       <p>Disponível para projetos colaborativos e experiências sob demanda</p>
-      <p>Entre em contato: <a href="mailto:contato@axlara.com" class="contact-link">contato@axlara.com</a></p>
+      <p>Entre em contato: <a href="mailto:studio.axlara@gmail.com" class="contact-link">studio.axlara@gmail.com</a></p>
       <div class="social-links">
         <a href="https://www.linkedin.com/in/laranegreiros" target="_blank"><i class="fab fa-linkedin"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="https://github.com/larangrs" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/axlara" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://wa.me/+5584996249406" target="_blank"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
