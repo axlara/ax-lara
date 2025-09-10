@@ -751,7 +751,15 @@
       color: #ffa500;
       border: 1px solid rgba(255, 165, 0, 0.2);
     }
-    
+    /* Estilo para o link que envolve o card */
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.project-card-link:hover {
+  text-decoration: none;
+}
     /* Detalhes do projeto */
     .project-detail {
       margin: 80px auto;
@@ -1301,7 +1309,7 @@
     
     <p>Nesse processo, aprofundei meus estudos em programação e descobri as tecnologias imersivas (XR), que se tornaram o elo natural entre minha formação em arquitetura e as infinitas possibilidades digitais. A partir daí, passei a direcionar minha atuação para o desenvolvimento de ambientes virtuais interativos.</p>
     
-    <p><strong>Hoje, me dedico à criação de experiências imersivas utilizando softwares e tecnologias que transformam espaços físicos em ambientes digitais interativos. Minha atuação envolve desde modelagem 3D otimizada para aplicações interativas e tours virtuais 360°, até projetos em realidade virtual voltados para cultura, bem-estar e inovação — unindo design, storytelling e tecnologia para criar jornadas imersivas significativas.</strong></p>
+    <p><strong>Hoje, me dedico à criação de experiências imersivas utilizando softwares e tecnologias que transformam espaços físicos em ambientes digitais interativos. Minha atuação envolve desde modelagem 3D otimizada para aplicações interativas e tours virtuais 360°, até projetos em realidade virtual voltados para cultura, bem-estar e inovação, unindo design, storytelling e tecnologia para criar jornadas imersivas significativas.</strong></p>
   </div>
 </div>
 
@@ -1334,73 +1342,78 @@
       </div>
 
       <!-- Seção Projetos Lançados -->
-      <div class="projects-section">
-        <h2 class="section-title">PROJETOS LANÇADOS</h2>
-        
-        <div class="projects-grid">
-          <!-- Projeto Memories Live -->
-          <article class="project-card">
-            <div class="project-image">
-              <img src="/imagens/vr_memorieslive.png" alt="Memories Live" loading="lazy">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title"> Memories Live</h3>
-              <p class="project-description">Imersão poética para reviver memórias especiais de forma personalizada, combinando tecnologia VR com narrativas emocionais.</p>
-              <div class="project-tech">
-                <span class="tech-tag">A-frame</span>
-                <span class="tech-tag">WebVR</span>
-                <span class="tech-tag">360 Video</span>
-              </div>
-              <span class="project-status status-released">Lançado</span>
-            </div>
-          </article>
+<div class="projects-section">
+  <h2 class="section-title">PROJETOS LANÇADOS</h2>
+  
+  <div class="projects-grid">
+    <!-- Projeto Memories Live -->
+    <a href="project-memories-live.html" class="project-card-link">
+      <article class="project-card">
+        <div class="project-image">
+          <img src="/imagens/vr_memorieslive.png" alt="Memories Live" loading="lazy">
         </div>
-      </div>
-
-      <!-- Seção Projetos em Desenvolvimento -->
-      <div class="projects-section">
-        <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
-        <div class="projects-grid">
-          <!-- Projeto Histórico em Realidade Virtual -->
-          <article class="project-card">
-            <div class="project-image">
-              <img src="/imagens/vr_citytime.png" alt="Story Scape VR" loading="lazy">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Story Scape </h3>
-              <p class="project-description">
-                Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo, revivendo a história de lugares reais.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">A-Frame</span>
-                <span class="tech-tag">WebVR</span>
-                <span class="tech-tag">História Urbana</span>
-              </div>
-              <span class="project-status status-development">Em desenvolvimento</span>
-            </div>
-          </article>
-
-          <!-- Projeto de Interiores em VR -->
-          <article class="project-card">
-            <div class="project-image">
-              <img src="/imagens/VR_img.png" alt="Interiores Imersivos VR" loading="lazy">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Immersive Design</h3>
-              <p class="project-description">
-                Visualização de projetos arquitetônicos residenciais em realidade virtual a partir de modelos 3D do SketchUp.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">SketchUp</span>
-                <span class="tech-tag">Meta Quest</span>
-                <span class="tech-tag">Arquitetura</span>
-              </div>
-              <span class="project-status status-development">Em desenvolvimento</span>
-            </div>
-          </article>
+        <div class="project-content">
+          <h3 class="project-title">Memories Live</h3>
+          <p class="project-description">Imersão poética para reviver memórias especiais de forma personalizada, combinando tecnologia VR com narrativas emocionais.</p>
+          <div class="project-tech">
+            <span class="tech-tag">A-frame</span>
+            <span class="tech-tag">WebVR</span>
+            <span class="tech-tag">360 Video</span>
+          </div>
+          <span class="project-status status-released">Lançado</span>
         </div>
-      </div>
+      </article>
+    </a>
+  </div>
+</div>
 
+<!-- Seção Projetos em Desenvolvimento -->
+<div class="projects-section">
+  <h2 class="section-title">PROJETOS EM DESENVOLVIMENTO</h2>
+  <div class="projects-grid">
+    <!-- Projeto Histórico em Realidade Virtual -->
+    <a href="project-story-scape.html" class="project-card-link">
+      <article class="project-card">
+        <div class="project-image">
+          <img src="/imagens/vr_citytime.png" alt="Story Scape VR" loading="lazy">
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Story Scape</h3>
+          <p class="project-description">
+            Uma experiência imersiva onde o usuário pode explorar a transformação de uma cidade ao longo do tempo, revivendo a história de lugares reais.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">A-Frame</span>
+            <span class="tech-tag">WebVR</span>
+            <span class="tech-tag">História Urbana</span>
+          </div>
+          <span class="project-status status-development">Em desenvolvimento</span>
+        </div>
+      </article>
+    </a>
+
+    <!-- Projeto de Interiores em VR -->
+    <a href="project-immersive-design.html" class="project-card-link">
+      <article class="project-card">
+        <div class="project-image">
+          <img src="/imagens/VR_img.png" alt="Interiores Imersivos VR" loading="lazy">
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Immersive Design</h3>
+          <p class="project-description">
+            Visualização de projetos arquitetônicos residenciais em realidade virtual a partir de modelos 3D do SketchUp.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">SketchUp</span>
+            <span class="tech-tag">Meta Quest</span>
+            <span class="tech-tag">Arquitetura</span>
+          </div>
+          <span class="project-status status-development">Em desenvolvimento</span>
+        </div>
+      </article>
+    </a>
+  </div>
+</div>
       <!-- Detalhamento do Memories Live -->
       <section class="project-detail">
         <h2 class="section-title">VR MEMORIES LIVE</h2>
