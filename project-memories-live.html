@@ -6,8 +6,8 @@
   <title>AX-LARA - MEMORIES LIVE VR</title>
   <!-- Fontes e Ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="  https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css  " rel="stylesheet">
   <style>
     :root {
       --primary: #00fff7;
@@ -131,6 +131,7 @@
       border: none;
       cursor: pointer;
       z-index: 1000;
+      position: relative;
     }
     .menu-toggle span {
       display: block;
@@ -139,6 +140,7 @@
       background: #fff;
       border-radius: 2px;
       transition: all 0.3s ease;
+      transform-origin: center;
     }
 
     /* Menu padrão (desktop) */
@@ -171,6 +173,67 @@
     .nav-menu a:hover::after,
     .nav-menu a.active::after {
       width: 100%;
+    }
+
+    /* ============ RESPONSIVIDADE NAVBAR ============ */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: right 0.4s ease;
+        padding: 50px 0;
+        border-left: 1px solid rgba(123, 97, 255, 0.15);
+      }
+      
+      .nav-menu.show {
+        right: 0;
+      }
+      
+      /* Animação do botão hamburguer para X */
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+      }
+      
+      /* Overlay quando o menu está aberto */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 800;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+      }
+      
+      .nav-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
     }
 
     /* Estilo para o link que envolve o card */
@@ -448,7 +511,7 @@
       color: var(--primary);
     }
 
-    /* ============ RESPONSIVIDADE ============ */
+    /* ============ RESPONSIVIDADE GERAL ============ */
     @media (max-width: 768px) {
       main {
         margin-top: 70px;
@@ -479,11 +542,26 @@
         width: 90%;
         max-width: 350px;
       }
+      
+      /* Ajustes para a barra de idiomas em mobile */
+      .language-bar {
+        top: 15px;
+        right: 60px; /* Evita sobreposição com o menu hamburguer */
+      }
     }
 
     @media (max-width: 480px) {
       .gallery-slide {
         height: 200px;
+      }
+      
+      .nav-logo {
+        font-size: 1.4rem;
+      }
+      
+      .logo-subtitle {
+        font-size: 0.4rem;
+        letter-spacing: 4px;
       }
     }
   </style>
@@ -492,26 +570,26 @@
   <!-- Barra de Idiomas -->
   <div class="language-bar">
     <button onclick="translateTo('en')" aria-label="English">
-      <img src="https://flagcdn.com/gb.svg" alt="English" width="24" height="16">
+      <img src="https://flagcdn.com/gb.svg  " alt="English" width="24" height="16">
     </button>
     <button onclick="translateTo('es')" aria-label="Español">
-      <img src="https://flagcdn.com/es.svg" alt="Español" width="24" height="16">
+      <img src="https://flagcdn.com/es.svg  " alt="Español" width="24" height="16">
     </button>
   </div>
 
-  <!-- Google Translate Script (oculto) -->
-  <div id="google_translate_element" style="display: none;"></div>
+  <!-- Overlay para quando o menu está aberto -->
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- Navegação -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">A<i>X</i>LARA<span class="logo-subtitle">aivrse studio</span></a>
-      <button class="menu-toggle" aria-label="Abrir menu">
+      <button class="menu-toggle" aria-label="Abrir menu" id="menuToggle">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="navMenu">
         <li><a href="index.html#home">Home</a></li>
         <li><a href="index.html#about">Sobre</a></li>
         <li><a href="index.html#curriculum">Currículo</a></li>
@@ -611,10 +689,10 @@
       <p>Disponível para projetos colaborativos e experiências sob demanda</p>
       <p>Entre em contato: <a href="mailto:studio.axlara@gmail.com" class="contact-link">studio.axlara@gmail.com</a></p>
       <div class="social-links">
-        <a href="https://www.linkedin.com/in/laranegreiros" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/aivrse/"><i class="fab fa-instagram"></i></a>
-        <a href="https://github.com/axlara" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://wa.me/+5584996249406" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="  https://www.linkedin.com/in/laranegreiros  " target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/aivrse/  "><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/axlara  " target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/+5584996249406  " target="_blank"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </footer>
@@ -622,11 +700,35 @@
   <!-- Scripts -->
   <script type="text/javascript">
     // Script do Menu Hamburguer
-    const toggleBtn = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-menu");
+    const toggleBtn = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navOverlay = document.getElementById("navOverlay");
+    
     if (toggleBtn && navMenu) {
       toggleBtn.addEventListener("click", () => {
         navMenu.classList.toggle("show");
+        toggleBtn.classList.toggle("active");
+        navOverlay.classList.toggle("show");
+        document.body.style.overflow = navMenu.classList.contains("show") ? "hidden" : "";
+      });
+      
+      // Fechar o menu ao clicar em um link
+      const navLinks = document.querySelectorAll(".nav-menu a");
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("show");
+          toggleBtn.classList.remove("active");
+          navOverlay.classList.remove("show");
+          document.body.style.overflow = "";
+        });
+      });
+      
+      // Fechar o menu ao clicar no overlay
+      navOverlay.addEventListener("click", () => {
+        navMenu.classList.remove("show");
+        toggleBtn.classList.remove("active");
+        navOverlay.classList.remove("show");
+        document.body.style.overflow = "";
       });
     }
 
